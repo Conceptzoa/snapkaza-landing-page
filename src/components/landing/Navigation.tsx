@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,9 +16,9 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: "Features", href: "#showcase" },
-    { name: "Contact Us", href: "#contact" },
-    { name: "Pricing", href: "#pricing" },
+    { name: "Features", href: "/#showcase" },
+    { name: "Contact Us", href: "/#contact" },
+    { name: "Pricing", href: "/#pricing" },
   ];
 
   return (
@@ -29,22 +30,22 @@ const Navigation = () => {
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="font-serif text-2xl font-bold text-foreground">
               Snap<span className="gold-text">Kaza</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -76,14 +77,14 @@ const Navigation = () => {
           <div className="md:hidden glass-card mt-4 p-6 animate-fade-in">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <Button
                 variant="outline"

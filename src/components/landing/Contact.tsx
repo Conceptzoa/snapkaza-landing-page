@@ -17,10 +17,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// EmailJS configuration - replace with your actual credentials
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = "service_2l0qm3e";
+const EMAILJS_TEMPLATE_ID = "template_s04o9o8";
+const EMAILJS_PUBLIC_KEY = "e66X25OZ_571CE0tV";
 
 const subjectOptions = [
   { value: "general", label: "General Inquiry" },

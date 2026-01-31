@@ -3,14 +3,14 @@ import { Linkedin, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
   product: [
-    { name: "Features", href: "#showcase" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "How It Works", href: "#process" },
-    { name: "FAQ", href: "#faq" },
+    { name: "Features", href: "/#showcase" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "How It Works", href: "/#process" },
+    { name: "FAQ", href: "/#faq" },
   ],
   company: [
-    { name: "About Us", href: "#about" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "About Us", href: "/#about" },
+    { name: "Contact Us", href: "/#contact" },
   ],
   legal: [
     { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
@@ -65,12 +65,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -82,12 +82,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

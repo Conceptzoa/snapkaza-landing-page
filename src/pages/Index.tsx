@@ -6,6 +6,8 @@ import {
   Pricing,
   Process,
   FAQ,
+  About,
+  Contact,
   Footer,
 } from "@/components/landing";
 
@@ -20,6 +22,8 @@ const Index = () => {
         <Pricing />
         <Process />
         <FAQ />
+        <About />
+        <Contact />
       </main>
       <Footer />
     </div>

@@ -53,8 +53,11 @@ const Navigation = () => {
             <Button
               variant="outline"
               className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
+              asChild
             >
-              Client Login
+              <a href="https://app.snapkaza.com" target="_blank" rel="noopener noreferrer">
+                Client Login
+              </a>
             </Button>
           </div>
 
@@ -85,8 +88,11 @@ const Navigation = () => {
               <Button
                 variant="outline"
                 className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary mt-2"
+                asChild
               >
-                Client Login
+                <a href="https://app.snapkaza.com" target="_blank" rel="noopener noreferrer">
+                  Client Login
+                </a>
               </Button>
             </div>
           </div>

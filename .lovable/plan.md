@@ -1,95 +1,78 @@
 
+# Fix Anchor Link Navigation on Home Page
 
-# Fix Navigation Links for Sub-Pages + Scroll-to-Top
-
-This update will fix internal anchor links to work from any page and add automatic scroll-to-top behavior when navigating between pages.
-
----
-
-## Summary of Changes
-
-| Change | Description |
-|--------|-------------|
-| **Absolute Anchor Paths** | Convert `#section` to `/#section` in Navigation and Footer |
-| **React Router Links** | Use `Link` component for proper SPA navigation |
-| **Scroll-to-Top Component** | Create a component that scrolls to top on route changes |
-| **Smooth Scroll Preservation** | Maintain smooth scroll when already on home page |
+This update will implement smart navigation logic that detects the current page and either smooth scrolls (when on home page) or navigates then scrolls (when on sub-pages).
 
 ---
 
-## Detailed Implementation
+## Problem
 
-### 1. Create ScrollToTop Component
+When using React Router's `Link` component with paths like `/#contact`, clicking these links on the home page causes a full navigation event instead of smooth scrolling. The browser treats `/#contact` as a route change rather than a hash anchor.
 
-**New file:** `src/components/ScrollToTop.tsx`
+---
+
+## Solution Overview
+
+Create a custom `AnchorLink` component that:
+1. Detects if user is already on the home page (`/`)
+2. If on home page: prevents default navigation and smooth scrolls to the target section
+3. If on sub-page: uses React Router to navigate to `/#section`
+
+---
+
+## Implementation Details
+
+### 1. Create AnchorLink Component
+
+**New file:** `src/components/AnchorLink.tsx`
 
 This component will:
-- Listen for route changes using React Router's `useLocation` hook
-- Scroll to top when the pathname changes (but not when hash changes)
-- Preserve smooth scroll behavior for anchor links on the same page
+- Accept `to` prop with format `/#section`
+- Use `useLocation` to detect current pathname
+- If on home page (`/`): call `scrollIntoView()` with smooth behavior
+- If on sub-page: use React Router's `useNavigate` to go to home page with hash
 
 ```text
-Route Change Detected
-        |
-        v
+User clicks link
+      |
+      v
 +------------------+
-| Is hash-only     |
-| change?          |
+| Is pathname "/"? |
 +------------------+
-    |         |
-   Yes        No
-    |         |
-    v         v
-(Do nothing) Scroll to top
+    |          |
+   Yes         No
+    |          |
+    v          v
+Smooth scroll  Navigate to
+to #section    /#section
 ```
 
-### 2. Update App.tsx
+### 2. Update Navigation.tsx
 
-- Import and add `ScrollToTop` component inside the `BrowserRouter`
-- This ensures scroll-to-top runs on every route change
+- Import `AnchorLink` component
+- Replace `<Link>` with `<AnchorLink>` for all anchor navigation links
+- Keep the logo as regular `<Link to="/">` since it's not an anchor link
 
-### 3. Update Navigation.tsx
+### 3. Update Footer.tsx
 
-**Changes:**
-- Import `Link` from `react-router-dom`
-- Update logo to use `<Link to="/">` 
-- Update navLinks to use absolute paths with hash
-
-| Link | Current | Updated |
-|------|---------|---------|
-| Logo | `#` | `/` |
-| Features | `#showcase` | `/#showcase` |
-| Contact Us | `#contact` | `/#contact` |
-| Pricing | `#pricing` | `/#pricing` |
-
-- Replace `<a href={...}>` with `<Link to={...}>` for all internal links
-
-### 4. Update Footer.tsx
-
-**Changes:**
-- Update footerLinks.product array to use absolute paths
-- Update footerLinks.company array to use absolute paths
-- Use `Link` component for all internal anchor links
-
-| Section | Link | Updated href |
-|---------|------|-------------|
-| Product | Features | `/#showcase` |
-| Product | Pricing | `/#pricing` |
-| Product | How It Works | `/#process` |
-| Product | FAQ | `/#faq` |
-| Company | About Us | `/#about` |
-| Company | Contact Us | `/#contact` |
+- Import `AnchorLink` component
+- Replace `<Link>` with `<AnchorLink>` for product and company links that use `/#section` format
+- Keep legal links as regular `<Link>` since they navigate to different pages
 
 ---
 
-## How Navigation Will Work
+## Section IDs Verification
 
-| Scenario | Behavior |
-|----------|----------|
-| **On home page, click anchor link** | React Router navigates to `/#section`, browser smooth scrolls to anchor |
-| **On sub-page, click anchor link** | React Router navigates to home page (`/`), then browser scrolls to `#section` |
-| **Click legal page link (e.g., Privacy Policy)** | React Router navigates to `/privacy-policy`, ScrollToTop scrolls page to top |
-| **Click logo from any page** | Navigates to home page, starts at top |
+All section IDs are correctly set and match the links:
+
+| Section | Component ID | Link Target |
+|---------|-------------|-------------|
+| Features | `id="showcase"` | `/#showcase` |
+| Contact | `id="contact"` | `/#contact` |
+| Pricing | `id="pricing"` | `/#pricing` |
+| Process | `id="process"` | `/#process` |
+| FAQ | `id="faq"` | `/#faq` |
+| About | `id="about"` | `/#about` |
 
 ---
 
@@ -97,21 +80,58 @@ Route Change Detected
 
 | File | Purpose |
 |------|---------|
-| `src/components/ScrollToTop.tsx` | Component that scrolls to top on route changes |
+| `src/components/AnchorLink.tsx` | Smart anchor link component with conditional scroll/navigate behavior |
 
 ## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/App.tsx` | Import and add ScrollToTop component inside BrowserRouter |
-| `src/components/landing/Navigation.tsx` | Import Link, update logo and nav links to use absolute paths |
-| `src/components/landing/Footer.tsx` | Update product and company links to use absolute paths with Link component |
+| `src/components/landing/Navigation.tsx` | Import and use `AnchorLink` for nav links |
+| `src/components/landing/Footer.tsx` | Import and use `AnchorLink` for product/company links |
 
 ---
 
-## Technical Notes
+## Technical Implementation
 
-- The `scroll-behavior: smooth` CSS property in `index.css` will continue to handle smooth scrolling
-- Using React Router's `Link` component ensures proper SPA navigation without full page reloads
-- The ScrollToTop component only triggers on pathname changes, so hash navigation within the same page won't cause unwanted scrolling
+### AnchorLink Component Logic
 
+```text
+function AnchorLink({ to, children, className, onClick }) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  
+  const handleClick = (e) => {
+    // Extract hash from "/#section" -> "#section"
+    const hash = to.replace('/', '')
+    
+    if (location.pathname === '/') {
+      // Already on home page - smooth scroll
+      e.preventDefault()
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // On sub-page - navigate to home with hash
+      e.preventDefault()
+      navigate(to)
+    }
+    
+    // Call optional onClick (for mobile menu close)
+    onClick?.()
+  }
+  
+  return <a href={to} onClick={handleClick} className={className}>{children}</a>
+}
+```
+
+---
+
+## Expected Behavior After Fix
+
+| Scenario | Before | After |
+|----------|--------|-------|
+| On home page, click "Contact Us" | Page reloads/jumps | Smooth scroll to contact section |
+| On home page, click "Features" | Page reloads/jumps | Smooth scroll to showcase section |
+| On Privacy Policy, click "Contact Us" | Nothing happens | Navigates to home, scrolls to contact |
+| On any sub-page, click footer link | Nothing happens | Navigates to home, scrolls to section |

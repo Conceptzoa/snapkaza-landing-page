@@ -1,137 +1,89 @@
 
-# Fix Anchor Link Navigation on Home Page
+# Handle Hash Navigation on Page Load
 
-This update will implement smart navigation logic that detects the current page and either smooth scrolls (when on home page) or navigates then scrolls (when on sub-pages).
+This update will fix the navigation so that when arriving at the home page with a hash (like `/#contact` from a sub-page), the page scrolls to the correct section instead of staying at the top.
 
 ---
 
 ## Problem
 
-When using React Router's `Link` component with paths like `/#contact`, clicking these links on the home page causes a full navigation event instead of smooth scrolling. The browser treats `/#contact` as a route change rather than a hash anchor.
+When clicking a link like "Contact Us" (`/#contact`) from a sub-page (e.g., Privacy Policy), the page navigates to the home page but stays at the top because:
+1. The `ScrollToTop` component scrolls to `(0, 0)` on pathname change
+2. There's no logic to handle the URL hash after navigation
 
 ---
 
 ## Solution Overview
 
-Create a custom `AnchorLink` component that:
-1. Detects if user is already on the home page (`/`)
-2. If on home page: prevents default navigation and smooth scrolls to the target section
-3. If on sub-page: uses React Router to navigate to `/#section`
+Modify the `ScrollToTop` component to:
+1. Check if the URL contains a hash when the route changes
+2. If there's a hash: scroll to that element instead of scrolling to top
+3. If there's no hash: scroll to top as before
+4. Use a small timeout to ensure the DOM is fully rendered before scrolling
 
 ---
 
 ## Implementation Details
 
-### 1. Create AnchorLink Component
+### Update ScrollToTop.tsx
 
-**New file:** `src/components/AnchorLink.tsx`
-
-This component will:
-- Accept `to` prop with format `/#section`
-- Use `useLocation` to detect current pathname
-- If on home page (`/`): call `scrollIntoView()` with smooth behavior
-- If on sub-page: use React Router's `useNavigate` to go to home page with hash
-
+**Current behavior:**
 ```text
-User clicks link
+Route changes -> Scroll to top (0, 0)
+```
+
+**New behavior:**
+```text
+Route changes
       |
       v
 +------------------+
-| Is pathname "/"? |
+| Has hash in URL? |
 +------------------+
     |          |
    Yes         No
     |          |
     v          v
-Smooth scroll  Navigate to
-to #section    /#section
+Scroll to    Scroll to
+#element     top (0, 0)
 ```
 
-### 2. Update Navigation.tsx
-
-- Import `AnchorLink` component
-- Replace `<Link>` with `<AnchorLink>` for all anchor navigation links
-- Keep the logo as regular `<Link to="/">` since it's not an anchor link
-
-### 3. Update Footer.tsx
-
-- Import `AnchorLink` component
-- Replace `<Link>` with `<AnchorLink>` for product and company links that use `/#section` format
-- Keep legal links as regular `<Link>` since they navigate to different pages
+**Key changes:**
+- Import `useLocation` to access both `pathname` and `hash`
+- Check if `location.hash` exists when pathname changes
+- If hash exists, find the element and scroll to it with smooth behavior
+- Use `setTimeout` to ensure content is rendered before scrolling
+- If no hash, scroll to top as before
 
 ---
 
-## Section IDs Verification
-
-All section IDs are correctly set and match the links:
-
-| Section | Component ID | Link Target |
-|---------|-------------|-------------|
-| Features | `id="showcase"` | `/#showcase` |
-| Contact | `id="contact"` | `/#contact` |
-| Pricing | `id="pricing"` | `/#pricing` |
-| Process | `id="process"` | `/#process` |
-| FAQ | `id="faq"` | `/#faq` |
-| About | `id="about"` | `/#about` |
-
----
-
-## Files to Create
-
-| File | Purpose |
-|------|---------|
-| `src/components/AnchorLink.tsx` | Smart anchor link component with conditional scroll/navigate behavior |
-
-## Files to Modify
+## File to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/landing/Navigation.tsx` | Import and use `AnchorLink` for nav links |
-| `src/components/landing/Footer.tsx` | Import and use `AnchorLink` for product/company links |
+| `src/components/ScrollToTop.tsx` | Add hash detection and scroll-to-element logic |
 
 ---
 
 ## Technical Implementation
 
-### AnchorLink Component Logic
+The updated `ScrollToTop` component will:
 
-```text
-function AnchorLink({ to, children, className, onClick }) {
-  const location = useLocation()
-  const navigate = useNavigate()
-  
-  const handleClick = (e) => {
-    // Extract hash from "/#section" -> "#section"
-    const hash = to.replace('/', '')
-    
-    if (location.pathname === '/') {
-      // Already on home page - smooth scroll
-      e.preventDefault()
-      const element = document.querySelector(hash)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    } else {
-      // On sub-page - navigate to home with hash
-      e.preventDefault()
-      navigate(to)
-    }
-    
-    // Call optional onClick (for mobile menu close)
-    onClick?.()
-  }
-  
-  return <a href={to} onClick={handleClick} className={className}>{children}</a>
-}
-```
+1. Use `useLocation()` to get both `pathname` and `hash`
+2. On pathname change, check if there's a hash
+3. If hash exists:
+   - Wait for a brief moment (using `setTimeout`) to ensure DOM is ready
+   - Find the element with `document.querySelector(hash)`
+   - Scroll to it using `scrollIntoView({ behavior: 'smooth' })`
+4. If no hash: scroll to top as before
 
 ---
 
 ## Expected Behavior After Fix
 
-| Scenario | Before | After |
-|----------|--------|-------|
-| On home page, click "Contact Us" | Page reloads/jumps | Smooth scroll to contact section |
-| On home page, click "Features" | Page reloads/jumps | Smooth scroll to showcase section |
-| On Privacy Policy, click "Contact Us" | Nothing happens | Navigates to home, scrolls to contact |
-| On any sub-page, click footer link | Nothing happens | Navigates to home, scrolls to section |
+| Scenario | Current Behavior | New Behavior |
+|----------|-----------------|--------------|
+| Click "Contact Us" from Privacy Policy | Lands at top of home page | Scrolls to contact section |
+| Click "FAQ" from Terms of Service | Lands at top of home page | Scrolls to FAQ section |
+| Click "Privacy Policy" from home | Scrolls to top | Scrolls to top (unchanged) |
+| Click logo from any page | Scrolls to top | Scrolls to top (unchanged) |

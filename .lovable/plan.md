@@ -1,89 +1,92 @@
 
-# Handle Hash Navigation on Page Load
 
-This update will fix the navigation so that when arriving at the home page with a hash (like `/#contact` from a sub-page), the page scrolls to the correct section instead of staying at the top.
+# Add Environmental Commitment Note
 
----
-
-## Problem
-
-When clicking a link like "Contact Us" (`/#contact`) from a sub-page (e.g., Privacy Policy), the page navigates to the home page but stays at the top because:
-1. The `ScrollToTop` component scrolls to `(0, 0)` on pathname change
-2. There's no logic to handle the URL hash after navigation
+This update will add a discreet environmental commitment message to the Service Packages section and the Footer, maintaining the luxury aesthetic of the site.
 
 ---
 
-## Solution Overview
+## Summary of Changes
 
-Modify the `ScrollToTop` component to:
-1. Check if the URL contains a hash when the route changes
-2. If there's a hash: scroll to that element instead of scrolling to top
-3. If there's no hash: scroll to top as before
-4. Use a small timeout to ensure the DOM is fully rendered before scrolling
+| Location | Change |
+|----------|--------|
+| **Pricing Section** | Add carbon removal note below the "custom solution" text |
+| **Footer** | Add carbon removal note in the bottom bar area |
+| **Icon** | Include a minimalist Leaf icon from Lucide |
 
 ---
 
 ## Implementation Details
 
-### Update ScrollToTop.tsx
+### 1. Update Pricing.tsx
 
-**Current behavior:**
-```text
-Route changes -> Scroll to top (0, 0)
-```
+**Changes:**
+- Import `Leaf` icon from `lucide-react`
+- Add a new paragraph below the existing "custom solution" note
+- Style with smaller font (`text-xs`), muted color, and subtle opacity
+- Include a small leaf icon aligned with the text
 
-**New behavior:**
-```text
-Route changes
-      |
-      v
-+------------------+
-| Has hash in URL? |
-+------------------+
-    |          |
-   Yes         No
-    |          |
-    v          v
-Scroll to    Scroll to
-#element     top (0, 0)
-```
+**Placement:** After line 135, add a new environmental note that sits below the enterprise packages text.
 
-**Key changes:**
-- Import `useLocation` to access both `pathname` and `hash`
-- Check if `location.hash` exists when pathname changes
-- If hash exists, find the element and scroll to it with smooth behavior
-- Use `setTimeout` to ensure content is rendered before scrolling
-- If no hash, scroll to top as before
+**Styling:**
+- Font size: `text-xs` (12px) - smaller than surrounding text
+- Color: `text-muted-foreground/70` - more subtle than regular muted text
+- Icon: `Leaf` at `w-3 h-3` - very small, matches text size
+- Layout: Centered with flex, icon and text inline
+
+### 2. Update Footer.tsx
+
+**Changes:**
+- Import `Leaf` icon from `lucide-react`
+- Add the environmental note in the bottom bar section
+- Position it between copyright and tagline on desktop, or as a third row on mobile
+
+**Placement:** Inside the bottom bar div (line 125), add a centered environmental message.
+
+**Styling:**
+- Font size: `text-xs` - consistent with pricing section
+- Color: `text-muted-foreground/60` - slightly more subtle in footer
+- Icon: `Leaf` at `w-3 h-3`
+- Layout: Flex with icon, centered in the footer area
 
 ---
 
-## File to Modify
+## Visual Design
+
+Both notes will have:
+- **Minimalist leaf icon**: Small green-tinted or muted leaf icon
+- **Subtle typography**: Extra small font size, reduced opacity
+- **Centered layout**: Fits naturally below main content
+- **Non-distracting**: Doesn't compete with CTAs or main content
+
+---
+
+## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/ScrollToTop.tsx` | Add hash detection and scroll-to-element logic |
+| `src/components/landing/Pricing.tsx` | Add Leaf import, add environmental note below pricing cards |
+| `src/components/landing/Footer.tsx` | Add Leaf import, add environmental note in bottom bar |
 
 ---
 
-## Technical Implementation
+## Code Preview
 
-The updated `ScrollToTop` component will:
+**Pricing Section Note:**
+```text
+┌─────────────────────────────────────────────────┐
+│  Need a custom solution? Contact us...          │
+│                                                 │
+│     🌿 1% of every purchase is dedicated to     │
+│        carbon removal initiatives.              │
+└─────────────────────────────────────────────────┘
+```
 
-1. Use `useLocation()` to get both `pathname` and `hash`
-2. On pathname change, check if there's a hash
-3. If hash exists:
-   - Wait for a brief moment (using `setTimeout`) to ensure DOM is ready
-   - Find the element with `document.querySelector(hash)`
-   - Scroll to it using `scrollIntoView({ behavior: 'smooth' })`
-4. If no hash: scroll to top as before
+**Footer Bottom Bar:**
+```text
+┌─────────────────────────────────────────────────┐
+│ © SnapKaza 2026          🌿 1% to carbon...     │
+│                     Crafted with passion...     │
+└─────────────────────────────────────────────────┘
+```
 
----
-
-## Expected Behavior After Fix
-
-| Scenario | Current Behavior | New Behavior |
-|----------|-----------------|--------------|
-| Click "Contact Us" from Privacy Policy | Lands at top of home page | Scrolls to contact section |
-| Click "FAQ" from Terms of Service | Lands at top of home page | Scrolls to FAQ section |
-| Click "Privacy Policy" from home | Scrolls to top | Scrolls to top (unchanged) |
-| Click logo from any page | Scrolls to top | Scrolls to top (unchanged) |

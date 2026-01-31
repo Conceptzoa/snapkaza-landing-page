@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
@@ -8,16 +9,16 @@ const footerLinks = {
     { name: "FAQ", href: "#faq" },
   ],
   company: [
-    { name: "About Us", href: "#" },
+    { name: "About Us", href: "#about" },
     { name: "Careers", href: "#" },
     { name: "Blog", href: "#" },
     { name: "Press", href: "#" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
-    { name: "GDPR", href: "#" },
+    { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
+    { name: "Terms of Service", href: "/terms-of-service", isRoute: true },
+    { name: "Cookie Policy", href: "/cookie-policy", isRoute: true },
+    { name: "GDPR", href: "/gdpr", isRoute: true },
   ],
 };
 
@@ -36,11 +37,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-6">
               <span className="font-serif text-2xl font-bold text-foreground">
                 Snap<span className="gold-text">Kaza</span>
               </span>
-            </a>
+            </Link>
             <p className="text-muted-foreground max-w-sm mb-6 leading-relaxed">
               AI-powered property marketing for luxury real estate. Transform your listings 
               into cinematic experiences that captivate buyers worldwide.
@@ -100,12 +101,21 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

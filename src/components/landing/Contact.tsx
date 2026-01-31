@@ -117,9 +117,6 @@ const Contact: React.FC = () => {
         <div className="max-w-2xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-6">
-              Contact Us
-            </span>
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">
               Get in <span className="gold-text">Touch</span>
             </h2>

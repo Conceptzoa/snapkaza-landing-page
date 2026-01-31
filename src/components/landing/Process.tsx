@@ -23,7 +23,7 @@ const steps = [
 
 const Process = () => {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
+    <section id="process" className="py-24 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-charcoal" />
 
       {/* Decorative gradient */}

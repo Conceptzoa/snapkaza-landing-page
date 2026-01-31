@@ -32,9 +32,6 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-6">
-              About Us
-            </span>
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-8">
               Elevating <span className="gold-text">Property Marketing</span>
             </h2>

@@ -19,7 +19,8 @@ import {
 
 // EmailJS configuration
 const EMAILJS_SERVICE_ID = "service_2l0qm3e";
-const EMAILJS_TEMPLATE_ID = "template_s04o9o8";
+const EMAILJS_TEMPLATE_ID_CLIENT = "template_s04o9o8";
+const EMAILJS_TEMPLATE_ID_INTERNAL = "template_scehzw3";
 const EMAILJS_PUBLIC_KEY = "e66X25OZ_571CE0tV";
 
 const subjectOptions = [
@@ -80,12 +81,20 @@ const Contact: React.FC = () => {
         message: data.message,
       };
 
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      await Promise.all([
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_CLIENT,
+          templateParams,
+          EMAILJS_PUBLIC_KEY
+        ),
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_INTERNAL,
+          templateParams,
+          EMAILJS_PUBLIC_KEY
+        ),
+      ]);
 
       toast.success("Message sent successfully!", {
         description: "We'll get back to you within 24 hours.",

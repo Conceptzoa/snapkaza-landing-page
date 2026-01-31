@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,15 +29,18 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-const Contact = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({
+const Contact: React.FC = () => {
+  const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      message: "",
+    },
   });
+
+  const { register, handleSubmit, reset, formState } = form;
+  const { errors, isSubmitting } = formState;
 
   const onSubmit = async (data: ContactFormData) => {
     // Simulate form submission

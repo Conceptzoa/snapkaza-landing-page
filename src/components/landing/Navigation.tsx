@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import AnchorLink from "@/components/AnchorLink";
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,13 +39,13 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <AnchorLink
                 key={link.name}
                 to={link.href}
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
               >
                 {link.name}
-              </Link>
+              </AnchorLink>
             ))}
           </div>
 
@@ -77,14 +77,14 @@ const Navigation = () => {
           <div className="md:hidden glass-card mt-4 p-6 animate-fade-in">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link
+                <AnchorLink
                   key={link.name}
                   to={link.href}
                   className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                </Link>
+                </AnchorLink>
               ))}
               <Button
                 variant="outline"

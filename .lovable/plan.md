@@ -1,151 +1,117 @@
 
 
-# UI and Navigation Refinements
+# Fix Navigation Links for Sub-Pages + Scroll-to-Top
 
-This update will apply navigation link changes, remove redundant elements, and ensure proper internal anchor linking with smooth scroll behavior.
+This update will fix internal anchor links to work from any page and add automatic scroll-to-top behavior when navigating between pages.
 
 ---
 
 ## Summary of Changes
 
-| Area | Change |
-|------|--------|
-| **Header Navigation** | Rename 'Showcase' to 'Contact Us', link to `#contact` |
-| **Hero Section** | Remove scroll indicator element |
-| **About Section** | Remove 'About Us' label badge |
-| **Contact Section** | Remove 'Contact Us' label badge |
-| **Footer** | Update links, remove Careers/Blog/Press, add Contact Us |
-| **FAQ Section** | Add `id="faq"` for anchor linking |
-| **Process Section** | Add `id="process"` for anchor linking |
+| Change | Description |
+|--------|-------------|
+| **Absolute Anchor Paths** | Convert `#section` to `/#section` in Navigation and Footer |
+| **React Router Links** | Use `Link` component for proper SPA navigation |
+| **Scroll-to-Top Component** | Create a component that scrolls to top on route changes |
+| **Smooth Scroll Preservation** | Maintain smooth scroll when already on home page |
 
 ---
 
-## Detailed Changes
+## Detailed Implementation
 
-### 1. Header Navigation (Navigation.tsx)
+### 1. Create ScrollToTop Component
 
-**Current navLinks array:**
-```text
-Features     -> #showcase
-Showcase     -> #showcase
-Pricing      -> #pricing
-```
+**New file:** `src/components/ScrollToTop.tsx`
 
-**Updated navLinks array:**
-```text
-Features     -> #showcase
-Contact Us   -> #contact
-Pricing      -> #pricing
-```
-
----
-
-### 2. Hero Section (Hero.tsx)
-
-**Remove:** The scroll indicator at the bottom of the hero section (lines 81-87)
+This component will:
+- Listen for route changes using React Router's `useLocation` hook
+- Scroll to top when the pathname changes (but not when hash changes)
+- Preserve smooth scroll behavior for anchor links on the same page
 
 ```text
-BEFORE:
-+--------------------+
-|    Hero Content    |
-+--------------------+
-|  Scroll to explore |
-|      [icon]        |
-+--------------------+
-
-AFTER:
-+--------------------+
-|    Hero Content    |
-+--------------------+
+Route Change Detected
+        |
+        v
++------------------+
+| Is hash-only     |
+| change?          |
++------------------+
+    |         |
+   Yes        No
+    |         |
+    v         v
+(Do nothing) Scroll to top
 ```
 
----
+### 2. Update App.tsx
 
-### 3. About Section (About.tsx)
+- Import and add `ScrollToTop` component inside the `BrowserRouter`
+- This ensures scroll-to-top runs on every route change
 
-**Remove:** The 'About Us' badge/label (line 35-37)
+### 3. Update Navigation.tsx
 
-```text
-BEFORE:
-[ About Us ]  <-- Remove this badge
-Elevating Property Marketing
+**Changes:**
+- Import `Link` from `react-router-dom`
+- Update logo to use `<Link to="/">` 
+- Update navLinks to use absolute paths with hash
 
-AFTER:
-Elevating Property Marketing
-```
+| Link | Current | Updated |
+|------|---------|---------|
+| Logo | `#` | `/` |
+| Features | `#showcase` | `/#showcase` |
+| Contact Us | `#contact` | `/#contact` |
+| Pricing | `#pricing` | `/#pricing` |
 
----
+- Replace `<a href={...}>` with `<Link to={...}>` for all internal links
 
-### 4. Contact Section (Contact.tsx)
+### 4. Update Footer.tsx
 
-**Remove:** The 'Contact Us' badge/label (lines 120-122)
+**Changes:**
+- Update footerLinks.product array to use absolute paths
+- Update footerLinks.company array to use absolute paths
+- Use `Link` component for all internal anchor links
 
-```text
-BEFORE:
-[ Contact Us ]  <-- Remove this badge
-Get in Touch
-
-AFTER:
-Get in Touch
-```
-
----
-
-### 5. Footer Updates (Footer.tsx)
-
-**Product column - Update links:**
-
-| Link | Current Target | New Target |
-|------|----------------|------------|
-| How It Works | `#process` | `#process` (keep, section will have id) |
-| FAQ | `#faq` | `#faq` (keep, section will have id) |
-
-**Company column - Changes:**
-
-| Action | Link |
-|--------|------|
-| Keep | About Us -> `#about` |
-| **Add** | Contact Us -> `#contact` (new, placed after About Us) |
-| **Remove** | Careers |
-| **Remove** | Blog |
-| **Remove** | Press |
+| Section | Link | Updated href |
+|---------|------|-------------|
+| Product | Features | `/#showcase` |
+| Product | Pricing | `/#pricing` |
+| Product | How It Works | `/#process` |
+| Product | FAQ | `/#faq` |
+| Company | About Us | `/#about` |
+| Company | Contact Us | `/#contact` |
 
 ---
 
-### 6. Section ID Attributes
+## How Navigation Will Work
 
-**Add missing section IDs:**
-
-| Section | Component | ID to Add |
-|---------|-----------|-----------|
-| The SnapKaza Method | Process.tsx | `id="process"` |
-| Frequently Asked Questions | FAQ.tsx | `id="faq"` |
+| Scenario | Behavior |
+|----------|----------|
+| **On home page, click anchor link** | React Router navigates to `/#section`, browser smooth scrolls to anchor |
+| **On sub-page, click anchor link** | React Router navigates to home page (`/`), then browser scrolls to `#section` |
+| **Click legal page link (e.g., Privacy Policy)** | React Router navigates to `/privacy-policy`, ScrollToTop scrolls page to top |
+| **Click logo from any page** | Navigates to home page, starts at top |
 
 ---
+
+## Files to Create
+
+| File | Purpose |
+|------|---------|
+| `src/components/ScrollToTop.tsx` | Component that scrolls to top on route changes |
 
 ## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/landing/Navigation.tsx` | Update navLinks: rename 'Showcase' to 'Contact Us', change href to `#contact` |
-| `src/components/landing/Hero.tsx` | Remove scroll indicator div (lines 81-87) |
-| `src/components/landing/About.tsx` | Remove 'About Us' span badge (lines 35-37) |
-| `src/components/landing/Contact.tsx` | Remove 'Contact Us' span badge (lines 120-122) |
-| `src/components/landing/Footer.tsx` | Update company links array: remove Careers/Blog/Press, add Contact Us after About Us |
-| `src/components/landing/Process.tsx` | Add `id="process"` to section element |
-| `src/components/landing/FAQ.tsx` | Add `id="faq"` to section element |
+| `src/App.tsx` | Import and add ScrollToTop component inside BrowserRouter |
+| `src/components/landing/Navigation.tsx` | Import Link, update logo and nav links to use absolute paths |
+| `src/components/landing/Footer.tsx` | Update product and company links to use absolute paths with Link component |
 
 ---
 
-## Smooth Scroll
+## Technical Notes
 
-Smooth scrolling is already enabled globally in `src/index.css`:
-
-```css
-html {
-  scroll-behavior: smooth;
-}
-```
-
-All internal anchor links (`#contact`, `#process`, `#faq`, etc.) will automatically use smooth scrolling.
+- The `scroll-behavior: smooth` CSS property in `index.css` will continue to handle smooth scrolling
+- Using React Router's `Link` component ensures proper SPA navigation without full page reloads
+- The ScrollToTop component only triggers on pathname changes, so hash navigation within the same page won't cause unwanted scrolling
 

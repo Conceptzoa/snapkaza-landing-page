@@ -1,4 +1,4 @@
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Leaf } from "lucide-react";
 
 const pricingTiers = [
   {
@@ -132,6 +132,12 @@ const Pricing = () => {
         <p className="text-center text-muted-foreground mt-12 max-w-2xl mx-auto">
           Need a custom solution for your agency? <a href="#" className="text-primary hover:underline">Contact us</a> for 
           volume discounts and enterprise packages.
+        </p>
+
+        {/* Environmental commitment */}
+        <p className="text-center text-xs text-muted-foreground/70 mt-6 flex items-center justify-center gap-1.5">
+          <Leaf className="w-3 h-3" />
+          1% of every purchase is dedicated to carbon removal initiatives.
         </p>
       </div>
     </section>

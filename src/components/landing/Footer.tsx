@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Youtube } from "lucide-react";
+import AnchorLink from "@/components/AnchorLink";
 
 const footerLinks = {
   product: [
@@ -65,12 +66,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <Link
+                  <AnchorLink
                     to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </Link>
+                  </AnchorLink>
                 </li>
               ))}
             </ul>
@@ -82,12 +83,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link
+                  <AnchorLink
                     to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </Link>
+                  </AnchorLink>
                 </li>
               ))}
             </ul>

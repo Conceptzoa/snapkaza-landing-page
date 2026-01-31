@@ -1,41 +1,84 @@
 
+# Dual EmailJS Template Configuration
 
-# EmailJS Credentials Configuration
-
-Update the contact form with your EmailJS credentials to enable email functionality.
+Update the contact form to send emails to both the client template and your internal alert template simultaneously.
 
 ---
 
-## Changes Required
+## Summary of Changes
+
+| Change | Description |
+|--------|-------------|
+| **Add Internal Template ID** | Add new constant for `template_scehzw3` |
+| **Update Submission Logic** | Send to both templates using `Promise.all()` |
+
+---
+
+## Configuration Update
+
+### Template IDs
+
+| Template | ID | Purpose |
+|----------|-----|---------|
+| Client Template | `template_s04o9o8` | Confirmation/response to the sender |
+| Internal Alert | `template_scehzw3` | Internal notification for your team |
+
+---
+
+## Technical Implementation
 
 ### File to Modify
 
 **`src/components/landing/Contact.tsx`**
 
-### Current Placeholders (lines 20-22)
+### Changes
 
-| Constant | Current Value | New Value |
-|----------|---------------|-----------|
-| `EMAILJS_SERVICE_ID` | `YOUR_SERVICE_ID` | `service_2l0qm3e` |
-| `EMAILJS_TEMPLATE_ID` | `YOUR_TEMPLATE_ID` | `template_s04o9o8` |
-| `EMAILJS_PUBLIC_KEY` | `YOUR_PUBLIC_KEY` | `e66X25OZ_571CE0tV` |
+1. **Add second template constant** (line 23):
+```text
+EMAILJS_TEMPLATE_ID_CLIENT = "template_s04o9o8"
+EMAILJS_TEMPLATE_ID_INTERNAL = "template_scehzw3"
+```
+
+2. **Update onSubmit function** - Use `Promise.all()` to send to both templates in parallel:
+   - Both emails use the same `templateParams` (name, email, subject, message)
+   - Both requests run simultaneously for faster submission
+   - If either fails, the error is caught and displayed
+
+### Updated Submission Flow
+
+```text
+Form Submit
+    |
+    v
+Build templateParams
+    |
+    v
++---------------------------+
+|      Promise.all()        |
+|  +---------------------+  |
+|  | Send to Client      |  |
+|  | (template_s04o9o8)  |  |
+|  +---------------------+  |
+|           +               |
+|  +---------------------+  |
+|  | Send to Internal    |  |
+|  | (template_scehzw3)  |  |
+|  +---------------------+  |
++---------------------------+
+    |
+    v
+Success Toast / Reset Form
+```
 
 ---
 
-## Template Variable Mapping
+## Both Templates Receive
 
-Your EmailJS template should use these variables, which are already configured in the form submission:
+| Variable | Value |
+|----------|-------|
+| `{{name}}` | User's full name |
+| `{{email}}` | User's email address |
+| `{{subject}}` | Selected inquiry type |
+| `{{message}}` | User's message |
 
-| Template Variable | Form Field | Description |
-|-------------------|------------|-------------|
-| `{{name}}` | Full Name | User's full name |
-| `{{email}}` | Agency Email | User's email address |
-| `{{subject}}` | Subject dropdown | Selected inquiry type (human-readable label) |
-| `{{message}}` | Message | User's message content |
-
----
-
-## Security Note
-
-EmailJS public keys are designed to be used on the client-side and are safe to include in frontend code. They are not secret keys and cannot be used to access your EmailJS account settings or send emails without proper domain restrictions configured in your EmailJS dashboard.
-
+Ensure your internal alert template (`template_scehzw3`) uses these same variable names to receive the form data correctly.

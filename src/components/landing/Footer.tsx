@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Instagram, Youtube, Leaf } from "lucide-react";
 import AnchorLink from "@/components/AnchorLink";
 
 const footerLinks = {
@@ -122,12 +122,18 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-sm">
-            © SnapKaza 2026. All rights reserved.
-          </p>
-          <p className="text-muted-foreground text-sm">
-            Crafted with passion for luxury real estate
+        <div className="pt-8 border-t border-border/30 flex flex-col items-center gap-4">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-muted-foreground text-sm">
+              © SnapKaza 2026. All rights reserved.
+            </p>
+            <p className="text-muted-foreground text-sm">
+              Crafted with passion for luxury real estate
+            </p>
+          </div>
+          <p className="text-xs text-muted-foreground/60 flex items-center gap-1.5">
+            <Leaf className="w-3 h-3" />
+            1% of every purchase is dedicated to carbon removal initiatives.
           </p>
         </div>
       </div>

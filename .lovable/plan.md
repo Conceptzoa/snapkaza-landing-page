@@ -1,63 +1,61 @@
 
 
-# Add Environmental Commitment Note
+# Update Pricing & FAQ Sections
 
-This update will add a discreet environmental commitment message to the Service Packages section and the Footer, maintaining the luxury aesthetic of the site.
+This update will refresh the pricing section with new branding, GBP currency, and updated package features, plus fix the FAQ contact link.
 
 ---
 
 ## Summary of Changes
 
-| Location | Change |
-|----------|--------|
-| **Pricing Section** | Add carbon removal note below the "custom solution" text |
-| **Footer** | Add carbon removal note in the bottom bar area |
-| **Icon** | Include a minimalist Leaf icon from Lucide |
+| Section | Change |
+|---------|--------|
+| **Pricing Title** | "Service Packages" → "Cinematic Packages" |
+| **Pricing Subtitle** | New copy about AI-generated cinema |
+| **Currency** | Euro (€) → British Pound (£) |
+| **Package Features** | Updated features for all three tiers |
+| **Agency Note** | Updated copy with link to contact form |
+| **Environmental Note** | Updated wording |
+| **FAQ Link** | "Contact our support team" → smooth scroll to contact form |
 
 ---
 
-## Implementation Details
+## Pricing Tiers Update
 
-### 1. Update Pricing.tsx
+### Essential - £79/property
+| Current | New |
+|---------|-----|
+| 15s AI Cinema Video | 30s AI Cinema Video |
+| Virtual Enhancements | 6 Virtual Enhancements |
+| HD Quality Output | AI Voice-over |
+| 48-hour Delivery | HD Quality Output |
+| 1 Revision Included | 48-hour Delivery |
+| | Social Media Formats |
+| | 1 Revisions |
 
-**Changes:**
-- Import `Leaf` icon from `lucide-react`
-- Add a new paragraph below the existing "custom solution" note
-- Style with smaller font (`text-xs`), muted color, and subtle opacity
-- Include a small leaf icon aligned with the text
+### Pro - £179/property  
+| Current | New |
+|---------|-----|
+| Everything in Essential | 60s AI Cinema Video |
+| AI Avatar Intro | 12 Virtual Enhancements |
+| AI Voice-over (UK/PT-PT) | AI Avatar Intro |
+| 4K Quality Output | AI Voice-over |
+| 24-hour Delivery | 4K Quality Output |
+| 3 Revisions Included | 36-hour Delivery |
+| Social Media Formats | Social Media Formats |
+| | 3 Revisions |
 
-**Placement:** After line 135, add a new environmental note that sits below the enterprise packages text.
-
-**Styling:**
-- Font size: `text-xs` (12px) - smaller than surrounding text
-- Color: `text-muted-foreground/70` - more subtle than regular muted text
-- Icon: `Leaf` at `w-3 h-3` - very small, matches text size
-- Layout: Centered with flex, icon and text inline
-
-### 2. Update Footer.tsx
-
-**Changes:**
-- Import `Leaf` icon from `lucide-react`
-- Add the environmental note in the bottom bar section
-- Position it between copyright and tagline on desktop, or as a third row on mobile
-
-**Placement:** Inside the bottom bar div (line 125), add a centered environmental message.
-
-**Styling:**
-- Font size: `text-xs` - consistent with pricing section
-- Color: `text-muted-foreground/60` - slightly more subtle in footer
-- Icon: `Leaf` at `w-3 h-3`
-- Layout: Flex with icon, centered in the footer area
-
----
-
-## Visual Design
-
-Both notes will have:
-- **Minimalist leaf icon**: Small green-tinted or muted leaf icon
-- **Subtle typography**: Extra small font size, reduced opacity
-- **Centered layout**: Fits naturally below main content
-- **Non-distracting**: Doesn't compete with CTAs or main content
+### Elite - £399/property
+| Current | New |
+|---------|-----|
+| Everything in Pro | 90s+ Full AI Avatar Cinematic Narrative |
+| 4K Full Narrative Video | 4K Full Narrative Video |
+| Voice Cloning Technology | 18+ Virtual Enhancements |
+| Priority Processing | Voice Cloning Technology |
+| 12-hour Rush Delivery | Priority Processing |
+| Unlimited Revisions | 24-hour Delivery |
+| Dedicated Account Manager | Social Media Formats |
+| White-label Options | 6 Revisions |
 
 ---
 
@@ -65,28 +63,43 @@ Both notes will have:
 
 | File | Changes |
 |------|---------|
-| `src/components/landing/Pricing.tsx` | Add Leaf import, add environmental note below pricing cards |
-| `src/components/landing/Footer.tsx` | Add Leaf import, add environmental note in bottom bar |
+| `src/components/landing/Pricing.tsx` | Update title, subtitle, pricing data, footer notes |
+| `src/components/landing/FAQ.tsx` | Import AnchorLink, update contact link |
 
 ---
 
-## Code Preview
+## Technical Details
 
-**Pricing Section Note:**
-```text
-┌─────────────────────────────────────────────────┐
-│  Need a custom solution? Contact us...          │
-│                                                 │
-│     🌿 1% of every purchase is dedicated to     │
-│        carbon removal initiatives.              │
-└─────────────────────────────────────────────────┘
-```
+### Pricing.tsx Changes
 
-**Footer Bottom Bar:**
-```text
-┌─────────────────────────────────────────────────┐
-│ © SnapKaza 2026          🌿 1% to carbon...     │
-│                     Crafted with passion...     │
-└─────────────────────────────────────────────────┘
-```
+1. **Import AnchorLink** for the contact link in the agency note
+2. **Update section header:**
+   - Title: `Cinematic <span className="gold-text">Packages</span>`
+   - Subtitle: "Elevate your listings with AI-generated cinema. Our technology transforms your property photographs into high-impact cinematic experiences."
+
+3. **Update pricingTiers array** with new prices and features
+
+4. **Update agency note:** 
+   - Text: "Operating a high-volume agency? Contact us for bespoke enterprise solutions and automated workflows."
+   - Link uses AnchorLink pointing to `/#contact`
+
+5. **Update environmental note:**
+   - Text: "Investing in the future: 1% of every purchase is dedicated to global carbon removal initiatives."
+
+### FAQ.tsx Changes
+
+1. **Import AnchorLink** from `@/components/AnchorLink`
+2. **Replace the `<a href="#">` tag** with `<AnchorLink to="/#contact">` for the "Contact our support team" link
+3. This ensures smooth scroll when on home page, proper navigation from sub-pages
+
+---
+
+## Expected Result
+
+- Pricing section displays new "Cinematic Packages" branding
+- All prices shown in GBP (£79, £179, £399)
+- Updated feature lists for each tier
+- Agency note links directly to contact form with smooth scroll
+- Environmental commitment note has updated wording
+- FAQ "Contact our support team" link smooth scrolls to contact section
 

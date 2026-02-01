@@ -1,17 +1,20 @@
 import { Check, Sparkles, Leaf } from "lucide-react";
+import AnchorLink from "@/components/AnchorLink";
 
 const pricingTiers = [
   {
     name: "Essential",
     tagline: "For Quick Listings",
-    price: "€49",
+    price: "£79",
     period: "/property",
     features: [
-      "15s AI Cinema Video",
-      "Virtual Enhancements",
+      "30s AI Cinema Video",
+      "6 Virtual Enhancements",
+      "AI Voice-over",
       "HD Quality Output",
       "48-hour Delivery",
-      "1 Revision Included",
+      "Social Media Formats",
+      "1 Revision",
     ],
     cta: "Get Started",
     popular: false,
@@ -19,16 +22,17 @@ const pricingTiers = [
   {
     name: "Pro",
     tagline: "For Premium Properties",
-    price: "€149",
+    price: "£179",
     period: "/property",
     features: [
-      "Everything in Essential",
+      "60s AI Cinema Video",
+      "12 Virtual Enhancements",
       "AI Avatar Intro",
-      "AI Voice-over (UK/PT-PT)",
+      "AI Voice-over",
       "4K Quality Output",
-      "24-hour Delivery",
-      "3 Revisions Included",
+      "36-hour Delivery",
       "Social Media Formats",
+      "3 Revisions",
     ],
     cta: "Get Started",
     popular: true,
@@ -36,17 +40,17 @@ const pricingTiers = [
   {
     name: "Elite",
     tagline: "The Luxury Standard",
-    price: "€349",
+    price: "£399",
     period: "/property",
     features: [
-      "Everything in Pro",
+      "90s+ Full AI Avatar Cinematic Narrative",
       "4K Full Narrative Video",
+      "18+ Virtual Enhancements",
       "Voice Cloning Technology",
       "Priority Processing",
-      "12-hour Rush Delivery",
-      "Unlimited Revisions",
-      "Dedicated Account Manager",
-      "White-label Options",
+      "24-hour Delivery",
+      "Social Media Formats",
+      "6 Revisions",
     ],
     cta: "Get Started",
     popular: false,
@@ -62,11 +66,11 @@ const Pricing = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Service <span className="gold-text">Packages</span>
+            Cinematic <span className="gold-text">Packages</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Choose the perfect package for your property marketing needs. 
-            All plans include our AI-powered transformation technology.
+            Elevate your listings with AI-generated cinema. Our technology transforms 
+            your property photographs into high-impact cinematic experiences.
           </p>
         </div>
 
@@ -130,14 +134,17 @@ const Pricing = () => {
 
         {/* Additional note */}
         <p className="text-center text-muted-foreground mt-12 max-w-2xl mx-auto">
-          Need a custom solution for your agency? <a href="#" className="text-primary hover:underline">Contact us</a> for 
-          volume discounts and enterprise packages.
+          Operating a high-volume agency?{" "}
+          <AnchorLink to="/#contact" className="text-primary hover:underline">
+            Contact us
+          </AnchorLink>{" "}
+          for bespoke enterprise solutions and automated workflows.
         </p>
 
         {/* Environmental commitment */}
         <p className="text-center text-xs text-muted-foreground/70 mt-6 flex items-center justify-center gap-1.5">
           <Leaf className="w-3 h-3" />
-          1% of every purchase is dedicated to carbon removal initiatives.
+          Investing in the future: 1% of every purchase is dedicated to global carbon removal initiatives.
         </p>
       </div>
     </section>

@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import AnchorLink from "@/components/AnchorLink";
 
 const faqs = [
   {
@@ -76,9 +77,9 @@ const FAQ = () => {
         <div className="text-center mt-12">
           <p className="text-muted-foreground">
             Still have questions?{" "}
-            <a href="#" className="text-primary hover:underline font-medium">
+            <AnchorLink to="/#contact" className="text-primary hover:underline font-medium">
               Contact our support team
-            </a>
+            </AnchorLink>
           </p>
         </div>
       </div>

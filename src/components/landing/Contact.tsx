@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 
 // n8n webhook configuration
-const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook-test/snapkaza-contact";
+const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook/snapkaza-contact";
 
 const subjectOptions = [
   { value: "general", label: "General Inquiry" },

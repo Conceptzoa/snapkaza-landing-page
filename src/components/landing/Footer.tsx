@@ -23,7 +23,7 @@ const footerLinks = {
 
 const socialLinks = [
   { name: "LinkedIn", icon: Linkedin, href: "#" },
-  { name: "Instagram", icon: Instagram, href: "#" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/snapkaza" },
   { name: "YouTube", icon: Youtube, href: "#" },
 ];
 
@@ -47,12 +47,16 @@ const Footer = () => {
             </p>
             {/* Social links */}
             <div className="flex gap-4">
-              {socialLinks.map((social) => (
+            {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors"
                   aria-label={social.name}
+                  {...(social.href.startsWith("http") && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
                 >
                   <social.icon className="w-5 h-5" />
                 </a>

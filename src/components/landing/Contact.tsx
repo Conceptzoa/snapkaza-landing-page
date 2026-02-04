@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import emailjs from "@emailjs/browser";
 import { Send, Mail, User, MessageSquare, ListFilter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,11 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// EmailJS configuration
-const EMAILJS_SERVICE_ID = "service_2l0qm3e";
-const EMAILJS_TEMPLATE_ID_CLIENT = "template_s04o9o8";
-const EMAILJS_TEMPLATE_ID_INTERNAL = "template_scehzw3";
-const EMAILJS_PUBLIC_KEY = "e66X25OZ_571CE0tV";
+// n8n webhook configuration
+const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook-test/snapkaza-contact";
 
 const subjectOptions = [
   { value: "general", label: "General Inquiry" },
@@ -68,33 +64,26 @@ const Contact: React.FC = () => {
   const { register, handleSubmit, reset, control, formState } = form;
   const { errors, isSubmitting } = formState;
 
-  const getSubjectLabel = (value: string) => {
-    return subjectOptions.find((opt) => opt.value === value)?.label || value;
-  };
-
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const templateParams = {
-        name: data.name,
-        email: data.email,
-        subject: getSubjectLabel(data.subject),
-        message: data.message,
-      };
+      const subjectLabel = subjectOptions.find((opt) => opt.value === data.subject)?.label || data.subject;
+      
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          subject: subjectLabel,
+          message: data.message,
+        }),
+      });
 
-      await Promise.all([
-        emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID_CLIENT,
-          templateParams,
-          EMAILJS_PUBLIC_KEY
-        ),
-        emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID_INTERNAL,
-          templateParams,
-          EMAILJS_PUBLIC_KEY
-        ),
-      ]);
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
 
       toast.success("Message sent successfully!", {
         description: "We'll get back to you within 24 hours.",
@@ -102,7 +91,7 @@ const Contact: React.FC = () => {
 
       reset();
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("Webhook error:", error);
       toast.error("Failed to send message", {
         description: "Please try again or contact us directly.",
       });

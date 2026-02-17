@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Send, Mail, User, MessageSquare, ListFilter } from "lucide-react";
+import { Send, Mail, User, MessageSquare, ListFilter, Calendar } from "lucide-react";
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,6 +71,35 @@ const Contact: React.FC = () => {
 
   const { register, handleSubmit, reset, control, formState } = form;
   const { errors, isSubmitting } = formState;
+
+  useEffect(() => {
+    const linkId = "calendly-widget-css";
+    const scriptId = "calendly-widget-js";
+
+    if (!document.getElementById(linkId)) {
+      const link = document.createElement("link");
+      link.id = linkId;
+      link.rel = "stylesheet";
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(link);
+    }
+
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: "https://calendly.com/hello-snapkaza/30min",
+      });
+    }
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -252,6 +289,24 @@ const Contact: React.FC = () => {
                 and will never be shared.
               </p>
             </div>
+
+            {/* Or divider */}
+            <div className="flex items-center gap-4 mt-6">
+              <div className="flex-1 h-px bg-border/30" />
+              <span className="text-muted-foreground text-sm">or</span>
+              <div className="flex-1 h-px bg-border/30" />
+            </div>
+
+            {/* Calendly Button */}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={openCalendly}
+              className="w-full mt-6 h-12 text-base font-semibold border-primary/50 text-foreground hover:border-primary hover:bg-primary/10 hover-glow transition-all duration-300"
+            >
+              <Calendar className="w-4 h-4" />
+              Schedule a Demo Meeting
+            </Button>
           </div>
         </div>
       </div>

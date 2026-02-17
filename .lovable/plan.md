@@ -1,46 +1,59 @@
 
 
-# Update n8n Webhook to Production URL
+# Add Calendly Popup Widget to Contact Section
 
-A simple one-line change to switch the contact form from the test webhook to the production webhook.
-
----
-
-## Change Summary
-
-| Setting | Current (Test) | New (Production) |
-|---------|----------------|------------------|
-| Webhook URL | `https://conceptzoa.app.n8n.cloud/webhook-test/snapkaza-contact` | `https://conceptzoa.app.n8n.cloud/webhook/snapkaza-contact` |
-
-The only difference is removing `-test` from the URL path.
+Add a "Schedule a Demo Meeting" button below the contact form that opens a Calendly popup, styled to match the luxury/minimalist theme.
 
 ---
 
-## File to Modify
+## What Will Change
 
-| File | Line | Change |
-|------|------|--------|
-| `src/components/landing/Contact.tsx` | 20 | Update `N8N_WEBHOOK_URL` constant |
+A new button will appear below the contact form's trust indicators section, separated by an "or" divider. Clicking it opens the Calendly scheduling popup.
 
 ---
 
-## Technical Details
+## Implementation Details
 
-**Line 20 update:**
+### File: `src/components/landing/Contact.tsx`
 
-From:
-```typescript
-const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook-test/snapkaza-contact";
+**1. Add Calendly type declaration and script loader:**
+- Add a `useEffect` hook that dynamically loads the Calendly external script (`https://assets.calendly.com/assets/external/widget.css` and `https://assets.calendly.com/assets/external/widget.js`) on component mount
+- Declare the `Calendly` global on the `window` object for TypeScript safety
+
+**2. Add click handler:**
+- Create an `openCalendly` function that calls `window.Calendly.initPopupWidget({ url: 'https://calendly.com/hello-snapkaza/30min' })`
+
+**3. Add the button below the trust indicators:**
+- An "or" text divider after the trust indicators
+- A ghost-style button with `Calendar` icon from lucide-react and text "Schedule a Demo Meeting"
+- Styled with a border matching the gold theme (`border-primary/50`), hover glow effect
+- Full width, responsive, matching the form's button height (h-12)
+
+### Layout After Change
+
+```text
+┌──────────────────────────────────┐
+│         Contact Form             │
+│  [Name]           [Email]        │
+│  [Subject Dropdown]              │
+│  [Message Textarea]              │
+│  [====== Send Message ======]    │
+│                                  │
+│  Trust indicator text            │
+│                                  │
+│  ─────────── or ───────────      │
+│                                  │
+│  [ Schedule a Demo Meeting ]     │
+└──────────────────────────────────┘
 ```
 
-To:
-```typescript
-const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook/snapkaza-contact";
-```
-
 ---
 
-## Note
+## Technical Notes
 
-Make sure your n8n production webhook is active and configured to handle the same payload structure (name, email, subject, message) before going live.
+- The Calendly script and CSS are loaded dynamically via `useEffect` with cleanup to avoid duplicates
+- TypeScript types are extended on `window` to avoid errors
+- No new dependencies needed -- uses the official Calendly widget JS from their CDN
+- The popup opens as an overlay, so no page navigation occurs
+- Button is fully responsive and inherits the same width/padding as the form
 

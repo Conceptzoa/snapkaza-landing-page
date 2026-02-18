@@ -33,16 +33,14 @@ const Hero = () => {
 
           {/* Headline */}
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-in-delay-1">
-            Elevate Your Property{" "}
+            Luxury Property Marketing from Your{" "}
             <br className="hidden md:block" />
-            Marketing with{" "}
-            <span className="gold-text">AI.</span>
+            <span className="gold-text">Smartphone.</span>
           </h1>
 
           {/* Sub-headline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-delay-2">
-            Transform smartphone photos into cinematic 4K videos, AI-narrated tours, 
-            and luxury virtual staging in minutes.
+            For independent estate agents. Transform mobile photos into 4K visuals and 3D tours instantly. Save thousands in professional fees today.
           </p>
 
           {/* CTA Buttons */}

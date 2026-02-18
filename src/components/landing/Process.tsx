@@ -5,19 +5,19 @@ const steps = [
     icon: Smartphone,
     number: "01",
     title: "Capture",
-    description: "Use your smartphone to photograph the property. No professional equipment needed—our AI handles the rest.",
+    description: "Upload your property photos directly from your smartphone to the SnapKaza app.",
   },
   {
     icon: Upload,
     number: "02",
     title: "Upload",
-    description: "Securely upload your images through your personal dashboard. Select your desired package and enhancements.",
+    description: "Our AI engine enhances visuals and generates 3D renders and narrated video tours.",
   },
   {
     icon: Globe,
     number: "03",
     title: "Deploy",
-    description: "Receive stunning marketing assets ready for global reach. Download, share, and impress your clients.",
+    description: "Launch your listing with a full luxury marketing suite in less than 30 minutes.",
   },
 ];
 
@@ -36,8 +36,7 @@ const Process = () => {
             The SnapKaza <span className="gold-text">Method</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            From capture to deployment in three simple steps. 
-            Our streamlined process ensures you get professional results every time.
+            Unlike traditional photographers who eat into your commission, we empower you to create professional assets instantly for a fraction of the cost.
           </p>
         </div>
 

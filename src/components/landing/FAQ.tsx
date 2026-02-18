@@ -8,32 +8,24 @@ import AnchorLink from "@/components/AnchorLink";
 
 const faqs = [
   {
-    question: "How does the AI enhancement technology work?",
-    answer: "Our proprietary AI analyzes your property photos and applies professional-grade enhancements including lighting correction, virtual staging, sky replacement, and detail enhancement. The AI has been trained on millions of luxury property images to understand what makes a listing visually compelling.",
+    question: "Do I really only need my smartphone?",
+    answer: "Yes. SnapKaza's AI is specifically engineered to transform standard mobile photos into 4K luxury assets. You don't need expensive gear or professional photographers anymore.",
   },
   {
-    question: "What is the typical turnaround time?",
-    answer: "Turnaround times depend on your package: Essential (48 hours), Pro (24 hours), and Elite (12 hours with rush processing). For urgent needs, contact us about same-day delivery options for Elite clients.",
+    question: "How much can I save compared to traditional photography?",
+    answer: "A typical pro-shoot in the UK costs £300–£600 per listing. With our Essential Pack (£79) or Pro Pack (£179), you save up to 70% while getting more features like 3D rendering and AI Avatars.",
   },
   {
-    question: "Which languages are supported for AI voice-overs?",
-    answer: "We currently support UK English and European Portuguese (PT-PT) for AI voice-overs. Spanish, French, and German are coming soon. Elite package clients can also use voice cloning technology to create narration in their own voice.",
+    question: "What is the turnaround time for a full Elite Pack?",
+    answer: "While traditional editors take 48h+, SnapKaza delivers your visual enhancements, 3D staging, and AI-narrated videos in minutes. Go from 'just listed' to 'live' on the same day.",
   },
   {
-    question: "What file formats do you deliver?",
-    answer: "We deliver in multiple formats optimized for different platforms: MP4 for video (1080p or 4K), JPEG for enhanced photos, and specific aspect ratios for Instagram (1:1, 4:5), YouTube (16:9), and Stories (9:16). All files are web-optimized for fast loading.",
+    question: "Is there a monthly subscription fee?",
+    answer: "No. We operate on a transparent Pay-per-Listing model. You only pay when you have a property to market. No contracts, no hidden fees.",
   },
   {
-    question: "How do you handle data privacy and security?",
-    answer: "We take data security seriously. All uploads are encrypted in transit and at rest. Your property images are automatically deleted 30 days after project completion. We never share or use your images for training purposes, and we're fully GDPR compliant.",
-  },
-  {
-    question: "Can I request revisions to my deliverables?",
-    answer: "Yes! The number of revisions depends on your package: Essential (1 revision), Pro (3 revisions), and Elite (unlimited revisions). Revisions typically take 12-24 hours depending on complexity.",
-  },
-  {
-    question: "Do you offer volume discounts for agencies?",
-    answer: "Absolutely. We offer custom enterprise packages for agencies processing 10+ properties per month. These include dedicated account management, priority processing, and significant volume discounts. Contact us to discuss your needs.",
+    question: "Are the AI Avatars professional enough for luxury clients?",
+    answer: "Absolutely. Our avatars use high-fidelity voice-over technology designed for the premium market, acting as a 24/7 concierge that presents your property with consistent, high-end quality.",
   },
 ];
 

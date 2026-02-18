@@ -1,59 +1,38 @@
 
+# Update FAQ Content
 
-# Add Calendly Popup Widget to Contact Section
-
-Add a "Schedule a Demo Meeting" button below the contact form that opens a Calendly popup, styled to match the luxury/minimalist theme.
-
----
-
-## What Will Change
-
-A new button will appear below the contact form's trust indicators section, separated by an "or" divider. Clicking it opens the Calendly scheduling popup.
+A content-only update to the `faqs` array in `src/components/landing/FAQ.tsx`. No layout, styling, component structure, or class names will be changed — only the question and answer text for each of the 5 entries.
 
 ---
 
-## Implementation Details
+## What Changes
 
-### File: `src/components/landing/Contact.tsx`
+The existing 7 FAQ entries are replaced with 5 new sales-focused entries targeting UK early adopters. Everything else — the accordion component, glassmorphism card styling, gold text hover, "Still have questions?" footer, and section header — remains identical.
 
-**1. Add Calendly type declaration and script loader:**
-- Add a `useEffect` hook that dynamically loads the Calendly external script (`https://assets.calendly.com/assets/external/widget.css` and `https://assets.calendly.com/assets/external/widget.js`) on component mount
-- Declare the `Calendly` global on the `window` object for TypeScript safety
+---
 
-**2. Add click handler:**
-- Create an `openCalendly` function that calls `window.Calendly.initPopupWidget({ url: 'https://calendly.com/hello-snapkaza/30min' })`
+## New FAQ Content
 
-**3. Add the button below the trust indicators:**
-- An "or" text divider after the trust indicators
-- A ghost-style button with `Calendar` icon from lucide-react and text "Schedule a Demo Meeting"
-- Styled with a border matching the gold theme (`border-primary/50`), hover glow effect
-- Full width, responsive, matching the form's button height (h-12)
+| # | Question | Key Message |
+|---|----------|-------------|
+| 1 | Do I really only need my smartphone? | No expensive gear needed — AI transforms mobile photos into 4K luxury assets |
+| 2 | How much can I save compared to traditional photography? | Save up to 70% vs. £300–£600 pro shoots with Essential (£79) or Pro (£179) packs |
+| 3 | What is the turnaround time for a full Elite Pack? | Minutes, not 48h+ — go from listed to live on the same day |
+| 4 | Is there a monthly subscription fee? | No — Pay-per-Listing only, no contracts, no hidden fees |
+| 5 | Are the AI Avatars professional enough for luxury clients? | High-fidelity voice-over technology acting as a 24/7 concierge |
 
-### Layout After Change
+---
 
-```text
-┌──────────────────────────────────┐
-│         Contact Form             │
-│  [Name]           [Email]        │
-│  [Subject Dropdown]              │
-│  [Message Textarea]              │
-│  [====== Send Message ======]    │
-│                                  │
-│  Trust indicator text            │
-│                                  │
-│  ─────────── or ───────────      │
-│                                  │
-│  [ Schedule a Demo Meeting ]     │
-└──────────────────────────────────┘
-```
+## File to Modify
+
+| File | Lines | Change |
+|------|-------|--------|
+| `src/components/landing/FAQ.tsx` | 9–38 | Replace `faqs` array content only |
 
 ---
 
 ## Technical Notes
 
-- The Calendly script and CSS are loaded dynamically via `useEffect` with cleanup to avoid duplicates
-- TypeScript types are extended on `window` to avoid errors
-- No new dependencies needed -- uses the official Calendly widget JS from their CDN
-- The popup opens as an overlay, so no page navigation occurs
-- Button is fully responsive and inherits the same width/padding as the form
-
+- The `faqs` array currently has 7 entries; the new version has 5. The `map()` render loop handles any count automatically — no template changes needed.
+- Tone is kept professional and sophisticated to match the luxury aesthetic.
+- UK price formatting (£) is used as requested.

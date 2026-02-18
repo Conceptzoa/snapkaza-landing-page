@@ -1,66 +1,103 @@
-# Update Hero & The SnapKaza Method — Copy-Only Changes
 
-Both sections keep their existing design, layout, CSS classes, animations, and responsive grid exactly as they are. Only text content is updated.
+# Refactor 'Powerful AI Features' — Dynamic Showcase Layout
 
----
-
-## Hero Section (`src/components/landing/Hero.tsx`)
-
-### Changes
-
-
-| Element          | Current                                                                                                           | New                                                                                                                                         |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Headline         | "Elevate Your Property Marketing with AI."                                                                        | "Luxury Property Marketing from Your Smartphone."                                                                                           |
-| Gold accent word | "AI."                                                                                                             | "Smartphone."                                                                                                                               |
-| Sub-headline     | "Transform smartphone photos into cinematic 4K videos, AI-narrated tours, and luxury virtual staging in minutes." | "For independent estate agents. Transform mobile photos into 4K visuals and 3D tours instantly. Save thousands in professional fees today." |
-
-
-The `<br className="hidden md:block" />` split will be repositioned to break naturally after "Marketing from Your" so the gold-accented word "Smartphone." anchors the second line on desktop.
-
-All animations (`animate-fade-in`, `animate-fade-in-delay-1/2/3`), the badge, CTA buttons, and stats block are untouched.
+Only `src/components/landing/Showcase.tsx` needs to change. `BeforeAfterSlider.tsx` is reused as-is.
 
 ---
 
-## The SnapKaza Method Section (`src/components/landing/Process.tsx`)
+## What Changes
 
-### Changes
+### 1. `featureTabs` data array — extend with `benefit` copy
 
-**Section header — add a subtitle paragraph:**
-Below the existing `<h2>` title, the current descriptive `<p>` is replaced with the new subtitle:
+Each tab entry gains a `benefit` string (the sales-focused paragraph shown below the visual), and the tab order is updated to match the request:
 
-> "Unlike traditional photographers who eat into your commission, we empower you to create professional assets instantly for a fraction of the cost."
-
-**Step data array — descriptions only (icons, numbers, titles, and layout unchanged):**
-
-
-| Step | Title (unchanged) | Old Description                                                | New Description                                                                     |
-| ---- | ----------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| 01   | Capture           | "Use your smartphone to photograph the property…"              | "Upload your property photos directly from your smartphone to the SnapKaza app."    |
-| 02   | Upload            | "Securely upload your images through your personal dashboard…" | "Our AI engine enhances visuals and generates 3D renders and narrated video tours." |
-| 03   | Deploy            | "Receive stunning marketing assets ready for global reach…"    | "Launch your listing with a full luxury marketing suite in less than 30 minutes."   |
-
-
-Note: Step 02's title is currently "Upload" — the new description shifts focus to the AI engine processing. The title remains "Upload" as instructed to keep all structural elements intact.
-
-The connector lines, gold icon badges, numbered badges, `hover-lift`, `hover-glow`, responsive `md:grid-cols-3` grid, and the "Start Your Transformation" CTA button are all preserved exactly.
+| Tab ID | Label | Benefit copy |
+|--------|-------|-------------|
+| `staging` | AI Virtual Staging | "Stop wasting £2,000 on physical staging. Our AI creates beautifully furnished 3D interiors from your raw photos, helping buyers visualise their dream home instantly." |
+| `video` | Cinematic AI Video | "Sell the future, not just the present. We transform a photo of a plot of land or a renovation project into a cinematic video of the completed building. Show your clients the final result before the first brick is even laid." |
+| `upscaling` | 4K Upscaling | "DSLR quality from your pocket. Our AI upgrades every smartphone photo to crystal-clear 4K resolution, ensuring your listings stand out on premium portals like Rightmove and Zoopla." |
+| `avatars` | AI Avatars | "Stop wasting hours filming and narrating. Simply send us your property photos, and we will create a high-end video narrated by your own Personalised AI Avatar. Build your personal brand on autopilot." |
 
 ---
 
-## Files to Modify
+### 2. Visual panels per tab
 
+| Tab | Visual |
+|-----|--------|
+| **AI Virtual Staging** | `BeforeAfterSlider` — Before: empty room with raw cement floor / After: same room with Scandinavian furniture and wooden flooring |
+| **Cinematic AI Video** | `VideoPlaceholder` (existing component, updated description) |
+| **4K Upscaling** | `BeforeAfterSlider` — Before: blurry/pixelated bedroom crop / After: same crop, sharp and clear |
+| **AI Avatars** | `VideoPlaceholder` (existing component, updated description) |
 
-| File                                 | Lines       | Type of change                                             |
-| ------------------------------------ | ----------- | ---------------------------------------------------------- |
-| `src/components/landing/Hero.tsx`    | 35–46       | Replace headline and sub-headline text only                |
-| `src/components/landing/Process.tsx` | 3–22, 38–41 | Replace step descriptions; replace subtitle paragraph text |
+**Unsplash image pairs (no auth required, free):**
 
+- Staging Before (empty/raw): `photo-1558618666-fcd25c85cd64` (unfurnished concrete-look room)
+- Staging After (furnished): `photo-1600596542815-ffad4c1539a9` (Scandinavian styled interior)
+- Upscaling Before: same bedroom image rendered blurry via CSS `filter: blur(3px) contrast(0.8)` with low `?w=200` resolution param to simulate pixelation
+- Upscaling After: same bedroom image rendered sharp at `?w=1200&q=90` — `photo-1616594039964-ae9021a400a0` (sharp bedroom detail)
+
+---
+
+### 3. Dynamic benefit copy block (below the visual panel)
+
+Replace the static `<div className="text-center mt-6">` description with a new animated benefit block. When the active tab changes, this area shows:
+
+```text
+┌────────────────────────────────────────────┐
+│  [Icon]  Tab Label                          │
+│                                            │
+│  Benefit-focused paragraph text...         │
+│  (max-w-2xl, centered, muted-foreground)   │
+└────────────────────────────────────────────┘
+```
+
+- Uses `key={activeTab}` on the inner container so React remounts it on tab switch, triggering the `animate-fade-in` CSS animation for a smooth content transition
+- Icon and label displayed in gold (`text-primary`), matching the active tab pill
+
+---
+
+### 4. Before/After images — `filter` trick for 4K Upscaling
+
+The `BeforeAfterSlider` already accepts any image URL. For the 4K Upscaling pair, we layer CSS classes on the image elements. Since `BeforeAfterSlider` doesn't expose image className props, two options exist:
+
+**Chosen approach:** Pass the same Unsplash image at very low resolution (`?w=120&q=30`) for "Before" and full resolution (`?w=1200&q=90`) for "After". The Unsplash CDN handles the quality difference, making the pixelation effect authentic without any CSS hacks or changes to `BeforeAfterSlider.tsx`.
+
+---
+
+## Full Layout After Change
+
+```text
+┌──────────────────────────────────────────────────────┐
+│              Powerful AI Features                    │
+│   [AI Virtual Staging] [Cinematic AI Video]          │
+│   [4K Upscaling]       [AI Avatars]                  │
+│                                                      │
+│  ┌──────────────── glass-card ───────────────────┐   │
+│  │  [Visual: BeforeAfterSlider or VideoPlaceholder]│  │
+│  └───────────────────────────────────────────────┘   │
+│                                                      │
+│  ── Animated benefit block (fades on tab change) ──  │
+│  [Icon]  Active Tab Label (gold)                     │
+│  Benefit copy paragraph (muted, centered)            │
+└──────────────────────────────────────────────────────┘
+```
+
+---
+
+## File to Modify
+
+| File | Change |
+|------|--------|
+| `src/components/landing/Showcase.tsx` | Full rewrite of data array, tab content panels, and bottom copy block |
+
+No other files change. `BeforeAfterSlider.tsx` is used as-is.
 
 ---
 
 ## Technical Notes
 
-- Zero structural, class, or layout changes in either file.
-- The `gold-text` span in the headline moves to wrap "Smartphone." instead of "AI."
-- The `<br className="hidden md:block" />` is kept for desktop line-breaking; its position within the headline is adjusted to suit the new, longer headline text.
-- No new imports, hooks, or dependencies needed.
+- **Tab order** is updated to: Staging → Video → Upscaling → Avatars (matching the user's requested order).
+- The `VideoPlaceholder` component's `description` prop is updated to match the new benefit-focused wording displayed inside the placeholder card.
+- The `key={activeTab}` prop on the benefit block wrapper ensures the `animate-fade-in` class retriggers on every tab change.
+- No new dependencies, no changes to `BeforeAfterSlider.tsx` or any UI component.
+- All existing class names (`glass-card`, `gold-gradient`, `gold-text`, `animate-fade-in`, `data-[state=active]` variants) are preserved.

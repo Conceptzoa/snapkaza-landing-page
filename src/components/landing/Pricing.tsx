@@ -18,6 +18,7 @@ const pricingTiers = [
     ],
     cta: "Get Started",
     popular: false,
+    stripeLink: "https://buy.stripe.com/5kQfZhcTyf4d4Nm9Hib3q00",
   },
   {
     name: "Pro",
@@ -36,6 +37,7 @@ const pricingTiers = [
     ],
     cta: "Get Started",
     popular: true,
+    stripeLink: "https://buy.stripe.com/cNi28raLq09jgw42eQb3q01",
   },
   {
     name: "Elite",
@@ -54,6 +56,7 @@ const pricingTiers = [
     ],
     cta: "Get Started",
     popular: false,
+    stripeLink: "https://buy.stripe.com/cNi6oH8Di8FP4Nm4mYb3q02",
   },
 ];
 
@@ -119,7 +122,9 @@ const Pricing = () => {
 
               {/* CTA */}
               <a
-                href="#"
+                href={tier.stripeLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`block text-center py-4 rounded-lg font-semibold transition-all duration-300 ${
                   tier.popular
                     ? "btn-gold w-full"

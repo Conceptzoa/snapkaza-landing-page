@@ -3,6 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Play, Home, Video, Users, Maximize } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import stagingVideo from "@/assets/staging-video.mp4";
+import stagingBefore from "@/assets/staging-before.png";
+import stagingAfter from "@/assets/staging-after.png";
 import upscalingBefore from "@/assets/upscaling-before.png";
 import upscalingAfter from "@/assets/upscaling-after.png";
 
@@ -116,13 +118,11 @@ const Showcase = () => {
               value="staging"
               className="mt-0 focus-visible:outline-none focus-visible:ring-0 data-[state=active]:animate-fade-in"
             >
-              <video
-                src={stagingVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full aspect-[16/10] rounded-xl object-cover"
+              <BeforeAfterSlider
+                beforeImage={stagingBefore}
+                afterImage={stagingAfter}
+                beforeLabel="Empty Room"
+                afterLabel="AI Staged"
               />
             </TabsContent>
 
@@ -130,10 +130,13 @@ const Showcase = () => {
               value="video"
               className="mt-0 focus-visible:outline-none focus-visible:ring-0 data-[state=active]:animate-fade-in"
             >
-              <VideoPlaceholder
-                icon={Video}
-                title="Cinematic AI Video"
-                description="We transform a photo of a plot of land or a renovation project into a cinematic video of the completed building."
+              <video
+                src={stagingVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full aspect-[16/10] rounded-xl object-cover"
               />
             </TabsContent>
 

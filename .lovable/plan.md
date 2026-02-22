@@ -1,49 +1,55 @@
 
 
-# Global Email, Footer & Social Media Updates
+# Update Before/After Slider Images with Custom Assets
 
-Targeted edits across 5 files. No layout or styling changes.
-
----
-
-## 1. Email Updates — Replace all `mailto:` links with `hello@snapkaza.com`
-
-| File | Line(s) | Current Email | New Email |
-|------|---------|---------------|-----------|
-| `src/pages/PrivacyPolicy.tsx` | 97–98 | `privacy@snapkaza.com` | `hello@snapkaza.com` |
-| `src/pages/TermsOfService.tsx` | 112–113 | `legal@snapkaza.com` | `hello@snapkaza.com` |
-| `src/pages/CookiePolicy.tsx` | 132–133 | `privacy@snapkaza.com` | `hello@snapkaza.com` |
-| `src/pages/GDPR.tsx` | 99–100 | `dpo@snapkaza.com` | `hello@snapkaza.com` |
-| `src/pages/GDPR.tsx` | 109–110 | `privacy@snapkaza.com` | `hello@snapkaza.com` |
-
-Each change updates both the `href="mailto:..."` attribute and the visible link text to `hello@snapkaza.com`.
+Replace the Unsplash placeholder images in the Showcase section with the four uploaded SnapKaza assets.
 
 ---
 
-## 2. Footer Social Media Updates (`src/components/landing/Footer.tsx`)
+## Step 1: Copy uploaded images to `src/assets/`
 
-**Remove LinkedIn:** Delete the LinkedIn entry from the `socialLinks` array (line 27) and remove the `Linkedin` import from lucide-react (line 2).
+Copy these 4 files from `user-uploads://` into the project:
 
-**Update YouTube URL:** Change the YouTube `href` from `"#"` to `"https://www.youtube.com/@SnapKaza"` (line 29).
-
-After these changes, the `socialLinks` array will contain only Instagram and YouTube — both with real external URLs.
-
----
-
-## Files to Modify
-
-| File | Changes |
-|------|---------|
-| `src/components/landing/Footer.tsx` | Remove LinkedIn icon/link; update YouTube URL; clean up import |
-| `src/pages/PrivacyPolicy.tsx` | Update email to `hello@snapkaza.com` |
-| `src/pages/TermsOfService.tsx` | Update email to `hello@snapkaza.com` |
-| `src/pages/CookiePolicy.tsx` | Update email to `hello@snapkaza.com` |
-| `src/pages/GDPR.tsx` | Update both email references to `hello@snapkaza.com` |
+| Source | Destination |
+|--------|-------------|
+| `user-uploads://Snapkaza_-_Living_Room_-_Before.png` | `src/assets/staging-before.png` |
+| `user-uploads://Snapkaza_-_Living_Room_-_After.png` | `src/assets/staging-after.png` |
+| `user-uploads://SnapKaza_-_Cozy_Scandinavian_kitchen_at_dusk_-_Before.png` | `src/assets/upscaling-before.png` |
+| `user-uploads://SnapKaza_-_Cozy_Scandinavian_kitchen_at_dusk_-_After.png` | `src/assets/upscaling-after.png` |
 
 ---
 
-## Technical Notes
+## Step 2: Update `src/components/landing/Showcase.tsx`
 
-- All external links (`target="_blank"`) in the footer already have `rel="noopener noreferrer"` applied conditionally for `http` URLs — YouTube will automatically get these attributes via the existing logic.
-- No new imports or dependencies needed.
+**Add 4 ES6 imports** at the top of the file:
+
+```
+import stagingBefore from "@/assets/staging-before.png";
+import stagingAfter from "@/assets/staging-after.png";
+import upscalingBefore from "@/assets/upscaling-before.png";
+import upscalingAfter from "@/assets/upscaling-after.png";
+```
+
+**Replace image URLs** in the two `BeforeAfterSlider` components:
+
+| Slider | Prop | Old Value (Unsplash URL) | New Value |
+|--------|------|-------------------------|-----------|
+| AI Virtual Staging | `beforeImage` | `https://images.unsplash.com/photo-1558618666-...` | `{stagingBefore}` |
+| AI Virtual Staging | `afterImage` | `https://images.unsplash.com/photo-1600596542815-...` | `{stagingAfter}` |
+| 4K Upscaling | `beforeImage` | `https://images.unsplash.com/photo-1616594039964-...?w=120...` | `{upscalingBefore}` |
+| 4K Upscaling | `afterImage` | `https://images.unsplash.com/photo-1616594039964-...?w=1200...` | `{upscalingAfter}` |
+
+Labels ("Empty Room" / "AI Staged" and "Low Resolution" / "4K Enhanced") remain unchanged. No aspect ratio adjustments needed -- both image pairs share similar landscape proportions, and the `BeforeAfterSlider` uses `object-cover` which handles any minor ratio differences.
+
+---
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `src/assets/staging-before.png` | New file (copied from upload) |
+| `src/assets/staging-after.png` | New file (copied from upload) |
+| `src/assets/upscaling-before.png` | New file (copied from upload) |
+| `src/assets/upscaling-after.png` | New file (copied from upload) |
+| `src/components/landing/Showcase.tsx` | Add 4 imports, replace 4 image URL strings with imported assets |
 

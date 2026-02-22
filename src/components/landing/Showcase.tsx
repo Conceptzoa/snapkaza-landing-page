@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Play, Home, Video, Users, Maximize } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import stagingBefore from "@/assets/staging-before.png";
+import stagingAfter from "@/assets/staging-after.png";
+import upscalingBefore from "@/assets/upscaling-before.png";
+import upscalingAfter from "@/assets/upscaling-after.png";
 
 const featureTabs = [
   {
@@ -114,8 +118,8 @@ const Showcase = () => {
               className="mt-0 focus-visible:outline-none focus-visible:ring-0 data-[state=active]:animate-fade-in"
             >
               <BeforeAfterSlider
-                beforeImage="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&auto=format&q=80"
-                afterImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop&auto=format&q=80"
+                beforeImage={stagingBefore}
+                afterImage={stagingAfter}
                 beforeLabel="Empty Room"
                 afterLabel="AI Staged"
               />
@@ -137,8 +141,8 @@ const Showcase = () => {
               className="mt-0 focus-visible:outline-none focus-visible:ring-0 data-[state=active]:animate-fade-in"
             >
               <BeforeAfterSlider
-                beforeImage="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=120&h=80&fit=crop&auto=format&q=30"
-                afterImage="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&h=800&fit=crop&auto=format&q=90"
+                beforeImage={upscalingBefore}
+                afterImage={upscalingAfter}
                 beforeLabel="Low Resolution"
                 afterLabel="4K Enhanced"
               />

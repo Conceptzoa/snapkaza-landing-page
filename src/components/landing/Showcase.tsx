@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Play, Home, Video, Users, Maximize } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
-import stagingBefore from "@/assets/staging-before.png";
-import stagingAfter from "@/assets/staging-after.png";
+import stagingVideo from "@/assets/staging-video.mp4";
 import upscalingBefore from "@/assets/upscaling-before.png";
 import upscalingAfter from "@/assets/upscaling-after.png";
 
@@ -117,11 +116,13 @@ const Showcase = () => {
               value="staging"
               className="mt-0 focus-visible:outline-none focus-visible:ring-0 data-[state=active]:animate-fade-in"
             >
-              <BeforeAfterSlider
-                beforeImage={stagingBefore}
-                afterImage={stagingAfter}
-                beforeLabel="Empty Room"
-                afterLabel="AI Staged"
+              <video
+                src={stagingVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full aspect-[16/10] rounded-xl object-cover"
               />
             </TabsContent>
 

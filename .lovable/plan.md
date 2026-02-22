@@ -1,32 +1,43 @@
 
 
-# Replace AI Virtual Staging Slider with Video Player
+# Swap Assets: Video to Cinematic AI Video, Slider Back to AI Virtual Staging
 
-Replace the `BeforeAfterSlider` in the "staging" tab with an autoplaying, looping, muted video using the uploaded MP4 file.
+Two changes in `src/components/landing/Showcase.tsx` plus copying new image assets.
 
 ---
 
-## Step 1: Copy video to project
-
-Copy the uploaded file into the assets directory:
+## Step 1: Copy uploaded images to `src/assets/`
 
 | Source | Destination |
 |--------|-------------|
-| `user-uploads://SnapKaza_-_Modern_townhouses_in_suburban_setting_-Construction_timelapse.mp4` | `src/assets/staging-video.mp4` |
+| `user-uploads://Snapkaza_-_Living_Room_-_Before-2.png` | `src/assets/staging-before.png` |
+| `user-uploads://Snapkaza_-_Living_Room_-_After-2.png` | `src/assets/staging-after.png` |
+
+The existing `staging-video.mp4` stays in place -- it will now be used by the Cinematic AI Video tab instead.
 
 ---
 
 ## Step 2: Update `src/components/landing/Showcase.tsx`
 
-**Add import** at the top (alongside existing asset imports):
+**Add two new imports** for the staging before/after images:
 
 ```ts
-import stagingVideo from "@/assets/staging-video.mp4";
+import stagingBefore from "@/assets/staging-before.png";
+import stagingAfter from "@/assets/staging-after.png";
 ```
 
-**Remove** the now-unused `stagingBefore` and `stagingAfter` imports (they are no longer referenced).
+**Replace the "staging" TabsContent** (lines 119-126): swap the `<video>` element back to a `BeforeAfterSlider`:
 
-**Replace the BeforeAfterSlider** in the "staging" `TabsContent` (lines 120-125) with a `<video>` element:
+```tsx
+<BeforeAfterSlider
+  beforeImage={stagingBefore}
+  afterImage={stagingAfter}
+  beforeLabel="Empty Room"
+  afterLabel="AI Staged"
+/>
+```
+
+**Replace the "video" TabsContent** (lines 133-137): swap the `VideoPlaceholder` with the video player using the existing `stagingVideo` import:
 
 ```tsx
 <video
@@ -39,13 +50,7 @@ import stagingVideo from "@/assets/staging-video.mp4";
 />
 ```
 
-This matches the existing `BeforeAfterSlider` aspect ratio (`aspect-[16/10]`) and rounded corner style (`rounded-xl`), and uses `object-cover` for consistent framing. The `playsInline` attribute ensures autoplay works on mobile Safari.
-
----
-
-## Step 3: Clean up unused assets
-
-The files `src/assets/staging-before.png` and `src/assets/staging-after.png` are no longer used anywhere and can be deleted.
+No other files change. The `stagingVideo` import already exists; the `BeforeAfterSlider` import already exists. Labels, descriptions, and benefit text remain unchanged.
 
 ---
 
@@ -53,8 +58,7 @@ The files `src/assets/staging-before.png` and `src/assets/staging-after.png` are
 
 | File | Change |
 |------|--------|
-| `src/assets/staging-video.mp4` | New file (copied from upload) |
-| `src/assets/staging-before.png` | Deleted (no longer referenced) |
-| `src/assets/staging-after.png` | Deleted (no longer referenced) |
-| `src/components/landing/Showcase.tsx` | Replace slider with video element; update imports |
+| `src/assets/staging-before.png` | New file (copied from upload) |
+| `src/assets/staging-after.png` | New file (copied from upload) |
+| `src/components/landing/Showcase.tsx` | Add 2 image imports; swap staging tab back to slider; move video to cinematic tab |
 

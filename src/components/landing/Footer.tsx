@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Youtube, Leaf } from "lucide-react";
+import { Instagram, Youtube, Leaf } from "lucide-react";
 import AnchorLink from "@/components/AnchorLink";
 
 const footerLinks = {
@@ -22,9 +22,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/snapkaza" },
-  { name: "YouTube", icon: Youtube, href: "#" },
+  { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@SnapKaza" },
 ];
 
 const Footer = () => {

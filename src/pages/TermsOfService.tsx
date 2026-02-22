@@ -109,8 +109,8 @@ const TermsOfService = () => {
                   <h2 className="text-xl font-semibold text-foreground">10. Contact</h2>
                   <p>
                     For questions about these terms, please contact us at{" "}
-                    <a href="mailto:legal@snapkaza.com" className="text-primary hover:underline">
-                      legal@snapkaza.com
+                    <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+                      hello@snapkaza.com
                     </a>
                   </p>
                 </section>

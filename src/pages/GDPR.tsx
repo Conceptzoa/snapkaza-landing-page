@@ -96,8 +96,8 @@ const GDPR = () => {
                   <h2 className="text-xl font-semibold text-foreground">6. Data Protection Officer</h2>
                   <p>
                     For GDPR-related inquiries, you can contact our Data Protection Officer at{" "}
-                    <a href="mailto:dpo@snapkaza.com" className="text-primary hover:underline">
-                      dpo@snapkaza.com
+                    <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+                      hello@snapkaza.com
                     </a>
                   </p>
                 </section>
@@ -106,8 +106,8 @@ const GDPR = () => {
                   <h2 className="text-xl font-semibold text-foreground">7. Exercising Your Rights</h2>
                   <p>
                     To exercise any of your GDPR rights, please contact us at{" "}
-                    <a href="mailto:privacy@snapkaza.com" className="text-primary hover:underline">
-                      privacy@snapkaza.com
+                    <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+                      hello@snapkaza.com
                     </a>
                     . We will respond to your request within 30 days.
                   </p>

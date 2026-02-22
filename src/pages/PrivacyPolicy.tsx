@@ -94,8 +94,8 @@ const PrivacyPolicy = () => {
                   <h2 className="text-xl font-semibold text-foreground">7. Contact Us</h2>
                   <p>
                     For privacy-related inquiries, please contact us at{" "}
-                    <a href="mailto:privacy@snapkaza.com" className="text-primary hover:underline">
-                      privacy@snapkaza.com
+                    <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+                      hello@snapkaza.com
                     </a>
                   </p>
                 </section>

@@ -38,6 +38,9 @@ const Process = () => {
           <p className="text-lg text-muted-foreground">
             Unlike traditional photographers who eat into your commission, we empower you to create professional assets instantly for a fraction of the cost.
           </p>
+          <p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mt-3">
+            Professional AI transformations with automated delivery within minutes.
+          </p>
         </div>
 
         {/* Steps */}

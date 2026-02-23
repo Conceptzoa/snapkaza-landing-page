@@ -286,7 +286,10 @@ const Contact: React.FC = () => {
             <div className="mt-8 pt-6 border-t border-border/30">
               <p className="text-center text-muted-foreground text-sm">
                 We typically respond within 24 hours. Your information is secure
-                and will never be shared.
+                and will never be shared. You can also reach us at{" "}
+                <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+                  hello@snapkaza.com
+                </a>.
               </p>
             </div>
 

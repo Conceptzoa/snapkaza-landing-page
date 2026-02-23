@@ -12,6 +12,7 @@ const footerLinks = {
   company: [
     { name: "About Us", href: "/#about" },
     { name: "Contact Us", href: "/#contact" },
+    { name: "hello@snapkaza.com", href: "mailto:hello@snapkaza.com" },
   ],
   legal: [
     { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },

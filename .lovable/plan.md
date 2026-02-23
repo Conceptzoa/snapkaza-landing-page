@@ -1,56 +1,56 @@
 
 
-# Swap Assets: Video to Cinematic AI Video, Slider Back to AI Virtual Staging
+# Landing Page Updates: Subtitle, Email Links
 
-Two changes in `src/components/landing/Showcase.tsx` plus copying new image assets.
-
----
-
-## Step 1: Copy uploaded images to `src/assets/`
-
-| Source | Destination |
-|--------|-------------|
-| `user-uploads://Snapkaza_-_Living_Room_-_Before-2.png` | `src/assets/staging-before.png` |
-| `user-uploads://Snapkaza_-_Living_Room_-_After-2.png` | `src/assets/staging-after.png` |
-
-The existing `staging-video.mp4` stays in place -- it will now be used by the Cinematic AI Video tab instead.
+Three targeted changes across three files.
 
 ---
 
-## Step 2: Update `src/components/landing/Showcase.tsx`
+## 1. Process Section -- Add Subtitle
 
-**Add two new imports** for the staging before/after images:
+**File:** `src/components/landing/Process.tsx` (lines 38-40)
+
+Insert a new subtitle paragraph between the existing description and the closing `</div>`, right after the current `<p>` tag:
+
+```tsx
+<p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mt-3">
+  Professional AI transformations with automated delivery within minutes.
+</p>
+```
+
+The italic serif font at a slightly smaller size maintains the luxury aesthetic while distinguishing it from the main description above.
+
+---
+
+## 2. Footer -- Add Email Link
+
+**File:** `src/components/landing/Footer.tsx`
+
+Add an email entry to the `company` array in `footerLinks`:
 
 ```ts
-import stagingBefore from "@/assets/staging-before.png";
-import stagingAfter from "@/assets/staging-after.png";
+{ name: "hello@snapkaza.com", href: "mailto:hello@snapkaza.com" },
 ```
 
-**Replace the "staging" TabsContent** (lines 119-126): swap the `<video>` element back to a `BeforeAfterSlider`:
+This will render under the "Company" column as a clickable mailto link, using the existing `AnchorLink` component (which handles both hash links and regular hrefs).
+
+---
+
+## 3. Contact Form -- Add Email Fallback Link
+
+**File:** `src/components/landing/Contact.tsx` (lines 287-290)
+
+Update the trust indicator text to include a clickable email link:
 
 ```tsx
-<BeforeAfterSlider
-  beforeImage={stagingBefore}
-  afterImage={stagingAfter}
-  beforeLabel="Empty Room"
-  afterLabel="AI Staged"
-/>
+<p className="text-center text-muted-foreground text-sm">
+  We typically respond within 24 hours. Your information is secure
+  and will never be shared. You can also reach us at{" "}
+  <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
+    hello@snapkaza.com
+  </a>.
+</p>
 ```
-
-**Replace the "video" TabsContent** (lines 133-137): swap the `VideoPlaceholder` with the video player using the existing `stagingVideo` import:
-
-```tsx
-<video
-  src={stagingVideo}
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="w-full aspect-[16/10] rounded-xl object-cover"
-/>
-```
-
-No other files change. The `stagingVideo` import already exists; the `BeforeAfterSlider` import already exists. Labels, descriptions, and benefit text remain unchanged.
 
 ---
 
@@ -58,7 +58,7 @@ No other files change. The `stagingVideo` import already exists; the `BeforeAfte
 
 | File | Change |
 |------|--------|
-| `src/assets/staging-before.png` | New file (copied from upload) |
-| `src/assets/staging-after.png` | New file (copied from upload) |
-| `src/components/landing/Showcase.tsx` | Add 2 image imports; swap staging tab back to slider; move video to cinematic tab |
+| `src/components/landing/Process.tsx` | Add italic subtitle below section header |
+| `src/components/landing/Footer.tsx` | Add `hello@snapkaza.com` mailto link to Company column |
+| `src/components/landing/Contact.tsx` | Add clickable email in trust indicator text |
 

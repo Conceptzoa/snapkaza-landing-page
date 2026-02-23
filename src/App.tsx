@@ -10,6 +10,7 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import GDPR from "./pages/GDPR";
 import NotFound from "./pages/NotFound";
+import WhatsAppFAB from "./components/WhatsAppFAB";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <WhatsAppFAB />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>

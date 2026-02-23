@@ -1,64 +1,45 @@
 
 
-# Landing Page Updates: Subtitle, Email Links
+# Add WhatsApp Floating Action Button (FAB)
 
-Three targeted changes across three files.
+Create a new `WhatsAppFAB` component and render it globally in `App.tsx` so it appears on all pages.
 
 ---
 
-## 1. Process Section -- Add Subtitle
+## New File: `src/components/WhatsAppFAB.tsx`
 
-**File:** `src/components/landing/Process.tsx` (lines 38-40)
+A fixed-position button in the bottom-right corner with:
 
-Insert a new subtitle paragraph between the existing description and the closing `</div>`, right after the current `<p>` tag:
+- **Custom WhatsApp SVG icon** (clean, recognizable silhouette) -- lucide-react does not include a WhatsApp icon, so we use an inline SVG.
+- **Styling**: Dark background with a subtle gold glow (`shadow-[0_0_20px_hsl(40_55%_60%_/_0.3)]`), rounded-full, matching the luxury theme.
+- **onClick**: Opens `https://wa.me/351962997070?text=Hi!%20I'm%20interested%20in%20SnapKaza%20AI%20features%20and%20would%20like%20more%20information.` in a new tab.
+- **Tooltip**: A small "Message us" label that appears on load (via a 3-second auto-dismiss animation using CSS) and also on hover.
+- **Positioning**: `fixed bottom-6 right-6` on desktop, `bottom-20 right-4` on mobile (using `md:` breakpoints) to avoid overlapping footer links.
+- **Size**: `w-14 h-14` (56px) -- touch-friendly on mobile.
+- **z-index**: `z-50` to stay above all content.
+
+The tooltip auto-shows on mount with a fade-in/fade-out animation (appears after 1s, disappears after 4s) using a `useState` + `useEffect` timer.
+
+---
+
+## Updated File: `src/App.tsx`
+
+Add `<WhatsAppFAB />` inside the `TooltipProvider`, after `<Sonner />` and before `<BrowserRouter>`, so it renders on every page:
 
 ```tsx
-<p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mt-3">
-  Professional AI transformations with automated delivery within minutes.
-</p>
-```
-
-The italic serif font at a slightly smaller size maintains the luxury aesthetic while distinguishing it from the main description above.
-
----
-
-## 2. Footer -- Add Email Link
-
-**File:** `src/components/landing/Footer.tsx`
-
-Add an email entry to the `company` array in `footerLinks`:
-
-```ts
-{ name: "hello@snapkaza.com", href: "mailto:hello@snapkaza.com" },
-```
-
-This will render under the "Company" column as a clickable mailto link, using the existing `AnchorLink` component (which handles both hash links and regular hrefs).
-
----
-
-## 3. Contact Form -- Add Email Fallback Link
-
-**File:** `src/components/landing/Contact.tsx` (lines 287-290)
-
-Update the trust indicator text to include a clickable email link:
-
-```tsx
-<p className="text-center text-muted-foreground text-sm">
-  We typically respond within 24 hours. Your information is secure
-  and will never be shared. You can also reach us at{" "}
-  <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
-    hello@snapkaza.com
-  </a>.
-</p>
+import WhatsAppFAB from "./components/WhatsAppFAB";
+// ...
+<Sonner />
+<WhatsAppFAB />
+<BrowserRouter>
 ```
 
 ---
 
-## Files Modified
+## Files Summary
 
 | File | Change |
 |------|--------|
-| `src/components/landing/Process.tsx` | Add italic subtitle below section header |
-| `src/components/landing/Footer.tsx` | Add `hello@snapkaza.com` mailto link to Company column |
-| `src/components/landing/Contact.tsx` | Add clickable email in trust indicator text |
+| `src/components/WhatsAppFAB.tsx` | New component |
+| `src/App.tsx` | Import and render `WhatsAppFAB` |
 

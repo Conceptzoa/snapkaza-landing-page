@@ -1,0 +1,37 @@
+{
+  "title": "Funcionalidades",
+  "titleHighlight": "IA Poderosas",
+  "subtitle": "Descubra o nosso conjunto de ferramentas com IA concebidas para transformar o seu marketing imobiliário em experiências visuais deslumbrantes.",
+  "tabs": {
+    "staging": {
+      "label": "Staging Virtual com IA",
+      "description": "Transforme espaços vazios em interiores de luxo lindamente mobilados",
+      "benefit": "Pare de gastar 2.000€ em staging físico. A nossa IA cria interiores 3D lindamente mobilados a partir das suas fotos originais, ajudando compradores a visualizar a casa dos seus sonhos instantaneamente."
+    },
+    "video": {
+      "label": "Vídeo Cinematográfico com IA",
+      "description": "Crie visitas guiadas a imóveis deslumbrantes com qualidade cinematográfica",
+      "benefit": "Venda o futuro, não apenas o presente. Transformamos uma foto de um terreno ou projecto de renovação num vídeo cinematográfico do edifício concluído. Mostre aos seus clientes o resultado final antes de colocar o primeiro tijolo."
+    },
+    "upscaling": {
+      "label": "Upscaling 4K",
+      "description": "Melhore qualquer imagem para resolução 4K cristalina",
+      "benefit": "Qualidade DSLR do seu bolso. A nossa IA melhora cada foto de smartphone para resolução 4K cristalina, garantindo que os seus anúncios se destacam nos portais premium como Idealista e Imovirtual."
+    },
+    "avatars": {
+      "label": "Avatares com IA",
+      "description": "Avatares apresentadores profissionais gerados por IA para tours de imóveis",
+      "benefit": "Pare de perder horas a filmar e narrar. Basta enviar-nos as fotos do seu imóvel e criaremos um vídeo de alta qualidade narrado pelo seu próprio Avatar IA Personalizado. Construa a sua marca pessoal no piloto automático."
+    }
+  },
+  "beforeLabel": {
+    "staging": "Quarto Vazio",
+    "upscaling": "Baixa Resolução"
+  },
+  "afterLabel": {
+    "staging": "Staging com IA",
+    "upscaling": "4K Melhorado"
+  },
+  "avatarPlaceholder": "Basta enviar-nos as fotos do seu imóvel e criaremos um vídeo de alta qualidade narrado pelo seu próprio Avatar IA Personalizado.",
+  "demoComingSoon": "Demo Em Breve"
+}

@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "features": "Funcionalidades",
+    "contactUs": "Contacte-nos",
+    "pricing": "Preços",
+    "clientLogin": "Área de Cliente"
+  },
+  "footer": {
+    "description": "Marketing imobiliário com IA para o segmento de luxo. Transforme os seus anúncios em experiências cinematográficas que cativam compradores em todo o mundo.",
+    "product": "Produto",
+    "features": "Funcionalidades",
+    "pricing": "Preços",
+    "howItWorks": "Como Funciona",
+    "faq": "FAQ",
+    "company": "Empresa",
+    "aboutUs": "Sobre Nós",
+    "contactUs": "Contacte-nos",
+    "legal": "Legal",
+    "privacyPolicy": "Política de Privacidade",
+    "termsOfService": "Termos de Serviço",
+    "cookiePolicy": "Política de Cookies",
+    "gdpr": "RGPD",
+    "copyright": "© SnapKaza 2026. Todos os direitos reservados.",
+    "tagline": "Criado com paixão pelo imobiliário de luxo",
+    "carbonNote": "1% de cada compra é dedicado a iniciativas de remoção de carbono."
+  },
+  "whatsapp": {
+    "tooltip": "Fale connosco",
+    "ariaLabel": "Contacte-nos no WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Página não encontrada",
+    "backHome": "Voltar ao Início"
+  },
+  "backToHome": "Voltar ao Início",
+  "meta": {
+    "title": "SnapKaza — Marketing Imobiliário de Luxo com IA",
+    "description": "Transforme fotos do telemóvel em visuais 4K, vídeos com IA e tours 3D. Marketing imobiliário de luxo a partir do seu smartphone."
+  }
+}

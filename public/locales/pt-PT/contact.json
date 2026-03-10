@@ -1,0 +1,42 @@
+{
+  "title": "Entre em",
+  "titleHighlight": "Contacto",
+  "subtitle": "Pronto para transformar o seu marketing imobiliário? Adoraríamos ouvir a sua opinião.",
+  "form": {
+    "fullName": "Nome Completo",
+    "namePlaceholder": "João Silva",
+    "agencyEmail": "Email da Agência",
+    "emailPlaceholder": "joao@imoveis-luxo.pt",
+    "subject": "Assunto",
+    "subjectPlaceholder": "Seleccione um assunto",
+    "yourMessage": "A Sua Mensagem",
+    "messagePlaceholder": "Fale-nos sobre as suas necessidades de marketing imobiliário...",
+    "sendMessage": "Enviar Mensagem",
+    "sending": "A enviar..."
+  },
+  "subjects": {
+    "general": "Pedido Geral",
+    "essential": "Lançamento de Imóvel - Essential",
+    "premium": "Lançamento de Imóvel - Premium",
+    "elite": "Lançamento de Imóvel - Elite",
+    "partnership": "Parcerias e Oportunidades de Negócio"
+  },
+  "validation": {
+    "nameRequired": "O nome completo é obrigatório",
+    "nameMax": "O nome deve ter menos de 100 caracteres",
+    "emailInvalid": "Por favor, introduza um endereço de email válido",
+    "emailMax": "O email deve ter menos de 255 caracteres",
+    "subjectRequired": "Por favor, seleccione um assunto",
+    "messageRequired": "A mensagem é obrigatória",
+    "messageMax": "A mensagem deve ter menos de 1000 caracteres"
+  },
+  "toast": {
+    "successTitle": "Mensagem enviada com sucesso!",
+    "successDescription": "Responderemos dentro de 24 horas.",
+    "errorTitle": "Falha ao enviar mensagem",
+    "errorDescription": "Por favor, tente novamente ou contacte-nos directamente."
+  },
+  "trustNote": "Normalmente respondemos dentro de 24 horas. As suas informações estão seguras e nunca serão partilhadas. Também pode contactar-nos em",
+  "or": "ou",
+  "scheduleMeeting": "Agendar uma Reunião Demo"
+}

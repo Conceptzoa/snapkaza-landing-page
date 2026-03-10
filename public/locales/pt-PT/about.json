@@ -1,0 +1,25 @@
+{
+  "title": "A Elevar o",
+  "titleHighlight": "Marketing Imobiliário",
+  "subtitle": "Sediada no Reino Unido, a SnapKaza é uma plataforma PropTech de próxima geração dedicada a capacitar consultores imobiliários de luxo através de activos visuais personalizados com IA.",
+  "features": [
+    {
+      "title": "Inovação PropTech",
+      "description": "Tecnologia de IA de ponta concebida especificamente para o imobiliário de luxo"
+    },
+    {
+      "title": "Alcance Global",
+      "description": "Ao serviço de consultores imobiliários premium no Reino Unido e além"
+    },
+    {
+      "title": "Soluções Personalizadas",
+      "description": "Activos visuais personalizados que reflectem a singularidade de cada imóvel"
+    },
+    {
+      "title": "Parceiro de Confiança",
+      "description": "Construído sobre privacidade, segurança e excelência profissional"
+    }
+  ],
+  "missionQuote": "\"Acreditamos que cada imóvel merece ser apresentado da melhor forma possível.\"",
+  "missionAttribution": "— A Equipa SnapKaza"
+}

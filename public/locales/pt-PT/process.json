@@ -1,0 +1,24 @@
+{
+  "title": "O Método",
+  "titleHighlight": "SnapKaza",
+  "subtitle": "Ao contrário dos fotógrafos tradicionais que reduzem a sua comissão, nós capacitamo-lo a criar activos profissionais instantaneamente por uma fracção do custo.",
+  "subtitleItalic": "Transformações profissionais com IA e entrega automatizada em minutos.",
+  "steps": [
+    {
+      "number": "01",
+      "title": "Capturar",
+      "description": "Carregue as fotos do seu imóvel directamente do seu smartphone para a aplicação SnapKaza."
+    },
+    {
+      "number": "02",
+      "title": "Carregar",
+      "description": "O nosso motor de IA melhora os visuais e gera renders 3D e tours em vídeo narrados."
+    },
+    {
+      "number": "03",
+      "title": "Publicar",
+      "description": "Lance o seu anúncio com um kit completo de marketing de luxo em menos de 30 minutos."
+    }
+  ],
+  "cta": "Inicie a Sua Transformação"
+}

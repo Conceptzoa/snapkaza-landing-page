@@ -1,0 +1,62 @@
+{
+  "title": "Pacotes",
+  "titleHighlight": "Cinematográficos",
+  "subtitle": "Eleve os seus anúncios com cinema gerado por IA. A nossa tecnologia transforma as suas fotografias de imóveis em experiências cinematográficas de alto impacto.",
+  "mostPopular": "Mais Popular",
+  "tiers": {
+    "essential": {
+      "name": "Essential",
+      "tagline": "Para Anúncios Rápidos",
+      "price": "€89",
+      "period": "/imóvel",
+      "features": [
+        "Vídeo Cinema IA de 30s",
+        "6 Melhorias Virtuais",
+        "Voz IA",
+        "Saída em HD",
+        "Entrega em 48 horas",
+        "Formatos para Redes Sociais",
+        "1 Revisão"
+      ],
+      "cta": "Começar Agora"
+    },
+    "pro": {
+      "name": "Pro",
+      "tagline": "Para Imóveis Premium",
+      "price": "€199",
+      "period": "/imóvel",
+      "features": [
+        "Vídeo Cinema IA de 60s",
+        "12 Melhorias Virtuais",
+        "Intro com Avatar IA",
+        "Voz IA",
+        "Saída em 4K",
+        "Entrega em 36 horas",
+        "Formatos para Redes Sociais",
+        "3 Revisões"
+      ],
+      "cta": "Começar Agora"
+    },
+    "elite": {
+      "name": "Elite",
+      "tagline": "O Padrão de Luxo",
+      "price": "€449",
+      "period": "/imóvel",
+      "features": [
+        "Narrativa Cinematográfica Completa com Avatar IA 90s+",
+        "Vídeo Narrativo Completo em 4K",
+        "18+ Melhorias Virtuais",
+        "Tecnologia de Clonagem de Voz",
+        "Processamento Prioritário",
+        "Entrega em 24 horas",
+        "Formatos para Redes Sociais",
+        "6 Revisões"
+      ],
+      "cta": "Começar Agora"
+    }
+  },
+  "enterpriseNote": "Opera uma agência de grande volume?",
+  "enterpriseLink": "Contacte-nos",
+  "enterpriseSuffix": "para soluções empresariais personalizadas e fluxos de trabalho automatizados.",
+  "carbonNote": "A investir no futuro: 1% de cada compra é dedicado a iniciativas globais de remoção de carbono."
+}

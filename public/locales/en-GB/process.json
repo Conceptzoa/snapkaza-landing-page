@@ -1,0 +1,24 @@
+{
+  "title": "The SnapKaza",
+  "titleHighlight": "Method",
+  "subtitle": "Unlike traditional photographers who eat into your commission, we empower you to create professional assets instantly for a fraction of the cost.",
+  "subtitleItalic": "Professional AI transformations with automated delivery within minutes.",
+  "steps": [
+    {
+      "number": "01",
+      "title": "Capture",
+      "description": "Upload your property photos directly from your smartphone to the SnapKaza app."
+    },
+    {
+      "number": "02",
+      "title": "Upload",
+      "description": "Our AI engine enhances visuals and generates 3D renders and narrated video tours."
+    },
+    {
+      "number": "03",
+      "title": "Deploy",
+      "description": "Launch your listing with a full luxury marketing suite in less than 30 minutes."
+    }
+  ],
+  "cta": "Start Your Transformation"
+}

@@ -1,0 +1,244 @@
+{
+  "privacy": {
+    "title": "Privacy",
+    "titleHighlight": "Policy",
+    "lastUpdated": "Last updated: January 2026",
+    "sections": [
+      {
+        "heading": "1. Introduction",
+        "content": "SnapKaza (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered property marketing platform."
+      },
+      {
+        "heading": "2. Information We Collect",
+        "content": "We may collect the following types of information:",
+        "list": [
+          "<strong>Personal Information:</strong> Name, email address, phone number, and agency details when you register or contact us.",
+          "<strong>Property Data:</strong> Images, videos, and property descriptions you upload for AI processing.",
+          "<strong>Usage Data:</strong> Information about how you interact with our platform, including access times and features used.",
+          "<strong>Technical Data:</strong> IP address, browser type, device information, and cookies."
+        ]
+      },
+      {
+        "heading": "3. How We Use Your Information",
+        "content": "We use collected information to:",
+        "list": [
+          "Provide and improve our AI property marketing services",
+          "Process and deliver your transformed visual assets",
+          "Communicate with you about your account and services",
+          "Send marketing communications (with your consent)",
+          "Ensure platform security and prevent fraud",
+          "Comply with legal obligations"
+        ]
+      },
+      {
+        "heading": "4. Data Sharing",
+        "content": "We may share your information with:",
+        "list": [
+          "<strong>Service Providers:</strong> Third-party vendors who assist in platform operations",
+          "<strong>Legal Requirements:</strong> When required by law or to protect our rights",
+          "<strong>Business Transfers:</strong> In connection with mergers or acquisitions"
+        ],
+        "suffix": "We never sell your personal information to third parties."
+      },
+      {
+        "heading": "5. Data Security",
+        "content": "We implement industry-standard security measures to protect your data, including encryption, secure servers, and regular security audits. However, no method of transmission over the Internet is 100% secure."
+      },
+      {
+        "heading": "6. Your Rights",
+        "content": "Depending on your location, you may have rights to:",
+        "list": [
+          "Access your personal data",
+          "Correct inaccurate data",
+          "Request deletion of your data",
+          "Object to data processing",
+          "Data portability"
+        ]
+      },
+      {
+        "heading": "7. Contact Us",
+        "content": "For privacy-related inquiries, please contact us at"
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of",
+    "titleHighlight": "Service",
+    "lastUpdated": "Last updated: January 2026",
+    "sections": [
+      {
+        "heading": "1. Agreement to Terms",
+        "content": "By accessing or using SnapKaza's services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our platform."
+      },
+      {
+        "heading": "2. Description of Services",
+        "content": "SnapKaza provides AI-powered property marketing services, including but not limited to:",
+        "list": [
+          "AI Virtual Staging",
+          "Cinematic AI Video creation",
+          "AI Avatar generation",
+          "4K Image Upscaling"
+        ]
+      },
+      {
+        "heading": "3. User Accounts",
+        "content": "You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You must provide accurate information when creating an account."
+      },
+      {
+        "heading": "4. Content Ownership",
+        "list": [
+          "<strong>Your Content:</strong> You retain ownership of original images and content you upload.",
+          "<strong>AI-Generated Content:</strong> Upon payment, you receive full commercial rights to AI-generated assets.",
+          "<strong>Licence:</strong> You grant us a licence to process your content for service delivery."
+        ]
+      },
+      {
+        "heading": "5. Acceptable Use",
+        "content": "You agree not to:",
+        "list": [
+          "Upload content you don't have rights to use",
+          "Use the service for illegal purposes",
+          "Attempt to reverse-engineer our AI technology",
+          "Resell or redistribute our services without authorisation",
+          "Upload harmful or malicious content"
+        ]
+      },
+      {
+        "heading": "6. Payment Terms",
+        "content": "Payments are processed securely through our payment providers. All fees are non-refundable unless otherwise stated. Prices may change with notice to users."
+      },
+      {
+        "heading": "7. Limitation of Liability",
+        "content": "SnapKaza is not liable for any indirect, incidental, special, or consequential damages arising from your use of our services. Our total liability is limited to the amount you paid for the specific service."
+      },
+      {
+        "heading": "8. Termination",
+        "content": "We may suspend or terminate your access to our services at any time for violation of these terms. You may also terminate your account at any time by contacting us."
+      },
+      {
+        "heading": "9. Governing Law",
+        "content": "These terms are governed by the laws of England and Wales. Any disputes shall be resolved in the courts of England and Wales."
+      },
+      {
+        "heading": "10. Contact",
+        "content": "For questions about these terms, please contact us at"
+      }
+    ]
+  },
+  "cookie": {
+    "title": "Cookie",
+    "titleHighlight": "Policy",
+    "lastUpdated": "Last updated: January 2026",
+    "sections": [
+      {
+        "heading": "1. What Are Cookies?",
+        "content": "Cookies are small text files stored on your device when you visit our website. They help us provide a better user experience and understand how our platform is used."
+      },
+      {
+        "heading": "2. Types of Cookies We Use",
+        "subsections": [
+          {
+            "heading": "Essential Cookies",
+            "content": "Required for the platform to function properly. These cannot be disabled.",
+            "list": ["Authentication and session management", "Security and fraud prevention", "Load balancing"]
+          },
+          {
+            "heading": "Analytics Cookies",
+            "content": "Help us understand how visitors interact with our platform.",
+            "list": ["Page view tracking", "Feature usage analytics", "Performance monitoring"]
+          },
+          {
+            "heading": "Functional Cookies",
+            "content": "Enable enhanced functionality and personalisation.",
+            "list": ["User preferences", "Language settings", "Recently viewed items"]
+          },
+          {
+            "heading": "Marketing Cookies",
+            "content": "Used to deliver relevant advertisements (only with your consent).",
+            "list": ["Ad targeting and measurement", "Social media integration", "Remarketing campaigns"]
+          }
+        ]
+      },
+      {
+        "heading": "3. Third-Party Cookies",
+        "content": "We use cookies from trusted third-party services including:",
+        "list": ["Google Analytics (analytics)", "Stripe (payment processing)", "Intercom (customer support)"]
+      },
+      {
+        "heading": "4. Managing Cookies",
+        "content": "You can manage your cookie preferences through:",
+        "list": ["Our cookie consent banner (shown on first visit)", "Your browser settings", "Third-party opt-out tools"],
+        "suffix": "Note: Disabling certain cookies may affect platform functionality."
+      },
+      {
+        "heading": "5. Cookie Retention",
+        "content": "Cookie retention periods vary:",
+        "list": ["<strong>Session cookies:</strong> Deleted when you close your browser", "<strong>Persistent cookies:</strong> Stored for up to 12 months"]
+      },
+      {
+        "heading": "6. Updates to This Policy",
+        "content": "We may update this Cookie Policy periodically. Changes will be posted on this page with an updated revision date."
+      },
+      {
+        "heading": "7. Contact Us",
+        "content": "For questions about our cookie practices, please contact us at"
+      }
+    ]
+  },
+  "gdpr": {
+    "titleHighlight": "GDPR",
+    "titleSuffix": "Compliance",
+    "lastUpdated": "Last updated: January 2026",
+    "sections": [
+      {
+        "heading": "1. Our Commitment to GDPR",
+        "content": "SnapKaza is committed to protecting the personal data of our users in compliance with the General Data Protection Regulation (GDPR). This page outlines how we meet our obligations under EU data protection law."
+      },
+      {
+        "heading": "2. Data Controller",
+        "content": "SnapKaza Ltd is the data controller for personal data collected through our platform. Our registered address is in the United Kingdom."
+      },
+      {
+        "heading": "3. Your Rights Under GDPR",
+        "content": "As an EU/EEA resident, you have the following rights:",
+        "subsections": [
+          { "heading": "Right to Access", "content": "You can request a copy of all personal data we hold about you." },
+          { "heading": "Right to Rectification", "content": "You can request correction of inaccurate or incomplete data." },
+          { "heading": "Right to Erasure (\"Right to be Forgotten\")", "content": "You can request deletion of your personal data in certain circumstances." },
+          { "heading": "Right to Restrict Processing", "content": "You can request that we limit how we use your data." },
+          { "heading": "Right to Data Portability", "content": "You can request your data in a machine-readable format." },
+          { "heading": "Right to Object", "content": "You can object to certain types of processing, including direct marketing." },
+          { "heading": "Rights Related to Automated Decision-Making", "content": "You have the right not to be subject to decisions based solely on automated processing." }
+        ]
+      },
+      {
+        "heading": "4. Legal Basis for Processing",
+        "content": "We process personal data based on:",
+        "list": [
+          "<strong>Contract:</strong> Processing necessary to provide our services",
+          "<strong>Consent:</strong> Where you have given explicit consent",
+          "<strong>Legitimate Interest:</strong> For business operations and service improvement",
+          "<strong>Legal Obligation:</strong> Where required by law"
+        ]
+      },
+      {
+        "heading": "5. Data Transfers",
+        "content": "When we transfer data outside the EU/EEA, we ensure appropriate safeguards are in place, including:",
+        "list": ["Standard Contractual Clauses (SCCs)", "Adequacy decisions", "Binding Corporate Rules where applicable"]
+      },
+      {
+        "heading": "6. Data Protection Officer",
+        "content": "For GDPR-related inquiries, you can contact our Data Protection Officer at"
+      },
+      {
+        "heading": "7. Exercising Your Rights",
+        "content": "To exercise any of your GDPR rights, please contact us at",
+        "suffix": "We will respond to your request within 30 days."
+      },
+      {
+        "heading": "8. Supervisory Authority",
+        "content": "If you are not satisfied with our response, you have the right to lodge a complaint with the Information Commissioner's Office (ICO) in the UK or your local data protection authority."
+      }
+    ]
+  }
+}

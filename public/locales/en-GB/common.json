@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "features": "Features",
+    "contactUs": "Contact Us",
+    "pricing": "Pricing",
+    "clientLogin": "Client Login"
+  },
+  "footer": {
+    "description": "AI-powered property marketing for luxury real estate. Transform your listings into cinematic experiences that captivate buyers worldwide.",
+    "product": "Product",
+    "features": "Features",
+    "pricing": "Pricing",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "gdpr": "GDPR",
+    "copyright": "© SnapKaza 2026. All rights reserved.",
+    "tagline": "Crafted with passion for luxury real estate",
+    "carbonNote": "1% of every purchase is dedicated to carbon removal initiatives."
+  },
+  "whatsapp": {
+    "tooltip": "Message us",
+    "ariaLabel": "Contact us on WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Page not found",
+    "backHome": "Return to Home"
+  },
+  "backToHome": "Back to Home",
+  "meta": {
+    "title": "SnapKaza — AI-Powered Luxury Property Marketing",
+    "description": "Transform mobile photos into 4K visuals, AI videos and 3D tours. Luxury property marketing from your smartphone."
+  }
+}

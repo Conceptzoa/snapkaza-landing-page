@@ -1,0 +1,34 @@
+{
+  "title": "Trusted by",
+  "titleHighlight": "Top Agents",
+  "subtitle": "Join hundreds of real estate professionals who've elevated their marketing with SnapKaza.",
+  "items": [
+    {
+      "name": "Sofia Mendes",
+      "role": "Senior Agent",
+      "agency": "Luxury Homes Portugal",
+      "quote": "SnapKaza transformed our listing presentations completely. Properties that sat for months now sell within weeks. The AI videos are absolutely stunning."
+    },
+    {
+      "name": "Miguel Santos",
+      "role": "Broker",
+      "agency": "Santos & Associates",
+      "quote": "The virtual staging saves us thousands per listing. Our clients can't believe the quality—many think we hired professional photographers."
+    },
+    {
+      "name": "Ana Costa",
+      "role": "Real Estate Director",
+      "agency": "Costa Luxury Properties",
+      "quote": "The AI narration in Portuguese is perfect. It's like having a professional voiceover artist on demand. Game-changer for international buyers."
+    },
+    {
+      "name": "João Ferreira",
+      "role": "Property Consultant",
+      "agency": "Prime Properties Lisbon",
+      "quote": "24-hour turnaround is incredible. I can photograph a property in the morning and have professional marketing materials by the next day."
+    }
+  ],
+  "prevLabel": "Previous testimonial",
+  "nextLabel": "Next testimonial",
+  "goToLabel": "Go to testimonial {{index}}"
+}

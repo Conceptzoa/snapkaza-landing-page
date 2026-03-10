@@ -1,0 +1,25 @@
+{
+  "title": "Elevating",
+  "titleHighlight": "Property Marketing",
+  "subtitle": "Based in the UK, SnapKaza is a next-generation PropTech platform dedicated to empowering luxury real estate consultants through bespoke AI-driven visual assets.",
+  "features": [
+    {
+      "title": "PropTech Innovation",
+      "description": "Cutting-edge AI technology designed specifically for luxury real estate"
+    },
+    {
+      "title": "Global Reach",
+      "description": "Serving premium property consultants across the UK and beyond"
+    },
+    {
+      "title": "Bespoke Solutions",
+      "description": "Tailored visual assets that reflect the uniqueness of each property"
+    },
+    {
+      "title": "Trusted Partner",
+      "description": "Built on privacy, security, and professional excellence"
+    }
+  ],
+  "missionQuote": "\"We believe every property deserves to be showcased at its absolute best.\"",
+  "missionAttribution": "— The SnapKaza Team"
+}

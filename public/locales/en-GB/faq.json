@@ -1,0 +1,29 @@
+{
+  "title": "Frequently Asked",
+  "titleHighlight": "Questions",
+  "subtitle": "Everything you need to know about SnapKaza's AI-powered property marketing.",
+  "items": [
+    {
+      "question": "Do I really only need my smartphone?",
+      "answer": "Yes. SnapKaza's AI is specifically engineered to transform standard mobile photos into 4K luxury assets. You don't need expensive gear or professional photographers anymore."
+    },
+    {
+      "question": "How much can I save compared to traditional photography?",
+      "answer": "A typical pro-shoot in the UK costs £300–£600 per listing. With our Essential Pack (£79) or Pro Pack (£179), you save up to 70% while getting more features like 3D rendering and AI Avatars."
+    },
+    {
+      "question": "What is the turnaround time for a full Elite Pack?",
+      "answer": "While traditional editors take 48h+, SnapKaza delivers your visual enhancements, 3D staging, and AI-narrated videos in minutes. Go from 'just listed' to 'live' on the same day."
+    },
+    {
+      "question": "Is there a monthly subscription fee?",
+      "answer": "No. We operate on a transparent Pay-per-Listing model. You only pay when you have a property to market. No contracts, no hidden fees."
+    },
+    {
+      "question": "Are the AI Avatars professional enough for luxury clients?",
+      "answer": "Absolutely. Our avatars use high-fidelity voice-over technology designed for the premium market, acting as a 24/7 concierge that presents your property with consistent, high-end quality."
+    }
+  ],
+  "stillHaveQuestions": "Still have questions?",
+  "contactSupport": "Contact our support team"
+}

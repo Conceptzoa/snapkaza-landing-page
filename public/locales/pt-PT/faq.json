@@ -1,0 +1,29 @@
+{
+  "title": "Perguntas",
+  "titleHighlight": "Frequentes",
+  "subtitle": "Tudo o que precisa de saber sobre o marketing imobiliário com IA do SnapKaza.",
+  "items": [
+    {
+      "question": "Preciso mesmo apenas do meu smartphone?",
+      "answer": "Sim. A IA do SnapKaza foi especificamente concebida para transformar fotos standard do telemóvel em activos de luxo em 4K. Já não precisa de equipamento caro nem de fotógrafos profissionais."
+    },
+    {
+      "question": "Quanto posso poupar em comparação com a fotografia tradicional?",
+      "answer": "Uma sessão fotográfica profissional típica custa entre 300€ e 600€ por anúncio. Com o nosso Pacote Essential (89€) ou Pro (199€), poupa até 70% e obtém mais funcionalidades como renderização 3D e Avatares IA."
+    },
+    {
+      "question": "Qual é o prazo de entrega para um Pacote Elite completo?",
+      "answer": "Enquanto os editores tradicionais demoram mais de 48h, o SnapKaza entrega as suas melhorias visuais, staging 3D e vídeos narrados com IA em minutos. Passe de 'acabado de listar' a 'publicado' no mesmo dia."
+    },
+    {
+      "question": "Existe uma assinatura mensal?",
+      "answer": "Não. Operamos num modelo transparente de Pagamento por Anúncio. Só paga quando tem um imóvel para comercializar. Sem contratos, sem taxas ocultas."
+    },
+    {
+      "question": "Os Avatares IA são profissionais o suficiente para clientes de luxo?",
+      "answer": "Absolutamente. Os nossos avatares utilizam tecnologia de voz de alta fidelidade concebida para o mercado premium, actuando como um concierge 24/7 que apresenta o seu imóvel com qualidade consistente e de alta gama."
+    }
+  ],
+  "stillHaveQuestions": "Ainda tem dúvidas?",
+  "contactSupport": "Contacte a nossa equipa de suporte"
+}

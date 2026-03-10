@@ -1,0 +1,62 @@
+{
+  "title": "Cinematic",
+  "titleHighlight": "Packages",
+  "subtitle": "Elevate your listings with AI-generated cinema. Our technology transforms your property photographs into high-impact cinematic experiences.",
+  "mostPopular": "Most Popular",
+  "tiers": {
+    "essential": {
+      "name": "Essential",
+      "tagline": "For Quick Listings",
+      "price": "£79",
+      "period": "/property",
+      "features": [
+        "30s AI Cinema Video",
+        "6 Virtual Enhancements",
+        "AI Voice-over",
+        "HD Quality Output",
+        "48-hour Delivery",
+        "Social Media Formats",
+        "1 Revision"
+      ],
+      "cta": "Get Started"
+    },
+    "pro": {
+      "name": "Pro",
+      "tagline": "For Premium Properties",
+      "price": "£179",
+      "period": "/property",
+      "features": [
+        "60s AI Cinema Video",
+        "12 Virtual Enhancements",
+        "AI Avatar Intro",
+        "AI Voice-over",
+        "4K Quality Output",
+        "36-hour Delivery",
+        "Social Media Formats",
+        "3 Revisions"
+      ],
+      "cta": "Get Started"
+    },
+    "elite": {
+      "name": "Elite",
+      "tagline": "The Luxury Standard",
+      "price": "£399",
+      "period": "/property",
+      "features": [
+        "90s+ Full AI Avatar Cinematic Narrative",
+        "4K Full Narrative Video",
+        "18+ Virtual Enhancements",
+        "Voice Cloning Technology",
+        "Priority Processing",
+        "24-hour Delivery",
+        "Social Media Formats",
+        "6 Revisions"
+      ],
+      "cta": "Get Started"
+    }
+  },
+  "enterpriseNote": "Operating a high-volume agency?",
+  "enterpriseLink": "Contact us",
+  "enterpriseSuffix": "for bespoke enterprise solutions and automated workflows.",
+  "carbonNote": "Investing in the future: 1% of every purchase is dedicated to global carbon removal initiatives."
+}

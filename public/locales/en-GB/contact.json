@@ -1,0 +1,42 @@
+{
+  "title": "Get in",
+  "titleHighlight": "Touch",
+  "subtitle": "Ready to transform your property marketing? We'd love to hear from you.",
+  "form": {
+    "fullName": "Full Name",
+    "namePlaceholder": "John Smith",
+    "agencyEmail": "Agency Email",
+    "emailPlaceholder": "john@luxuryestates.co.uk",
+    "subject": "Subject",
+    "subjectPlaceholder": "Select a subject",
+    "yourMessage": "Your Message",
+    "messagePlaceholder": "Tell us about your property marketing needs...",
+    "sendMessage": "Send Message",
+    "sending": "Sending..."
+  },
+  "subjects": {
+    "general": "General Inquiry",
+    "essential": "Property Launch - Essential",
+    "premium": "Property Launch - Premium",
+    "elite": "Property Launch - Elite",
+    "partnership": "Partnership & Business Opportunities"
+  },
+  "validation": {
+    "nameRequired": "Full name is required",
+    "nameMax": "Name must be less than 100 characters",
+    "emailInvalid": "Please enter a valid email address",
+    "emailMax": "Email must be less than 255 characters",
+    "subjectRequired": "Please select a subject",
+    "messageRequired": "Message is required",
+    "messageMax": "Message must be less than 1000 characters"
+  },
+  "toast": {
+    "successTitle": "Message sent successfully!",
+    "successDescription": "We'll get back to you within 24 hours.",
+    "errorTitle": "Failed to send message",
+    "errorDescription": "Please try again or contact us directly."
+  },
+  "trustNote": "We typically respond within 24 hours. Your information is secure and will never be shared. You can also reach us at",
+  "or": "or",
+  "scheduleMeeting": "Schedule a Demo Meeting"
+}

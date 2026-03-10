@@ -1,26 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Instagram, Youtube, Leaf } from "lucide-react";
 import AnchorLink from "@/components/AnchorLink";
-
-const footerLinks = {
-  product: [
-    { name: "Features", href: "/#showcase" },
-    { name: "Pricing", href: "/#pricing" },
-    { name: "How It Works", href: "/#process" },
-    { name: "FAQ", href: "/#faq" },
-  ],
-  company: [
-    { name: "About Us", href: "/#about" },
-    { name: "Contact Us", href: "/#contact" },
-    { name: "hello@snapkaza.com", href: "mailto:hello@snapkaza.com" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
-    { name: "Terms of Service", href: "/terms-of-service", isRoute: true },
-    { name: "Cookie Policy", href: "/cookie-policy", isRoute: true },
-    { name: "GDPR", href: "/gdpr", isRoute: true },
-  ],
-};
 
 const socialLinks = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/snapkaza" },
@@ -28,26 +9,47 @@ const socialLinks = [
 ];
 
 const Footer = () => {
+  const { t } = useTranslation("common");
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || "en";
+
+  const productLinks = [
+    { name: t("footer.features"), href: "/#showcase" },
+    { name: t("footer.pricing"), href: "/#pricing" },
+    { name: t("footer.howItWorks"), href: "/#process" },
+    { name: t("footer.faq"), href: "/#faq" },
+  ];
+
+  const companyLinks = [
+    { name: t("footer.aboutUs"), href: "/#about" },
+    { name: t("footer.contactUs"), href: "/#contact" },
+    { name: "hello@snapkaza.com", href: "mailto:hello@snapkaza.com" },
+  ];
+
+  const legalLinks = [
+    { name: t("footer.privacyPolicy"), href: `/${currentLang}/privacy-policy`, isRoute: true },
+    { name: t("footer.termsOfService"), href: `/${currentLang}/terms-of-service`, isRoute: true },
+    { name: t("footer.cookiePolicy"), href: `/${currentLang}/cookie-policy`, isRoute: true },
+    { name: t("footer.gdpr"), href: `/${currentLang}/gdpr`, isRoute: true },
+  ];
+
   return (
     <footer className="py-16 md:py-20 relative border-t border-border/30">
       <div className="absolute inset-0 bg-charcoal" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Brand column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-6">
+            <Link to={`/${currentLang}`} className="inline-block mb-6">
               <span className="font-serif text-2xl font-bold text-foreground">
                 Snap<span className="gold-text">Kaza</span>
               </span>
             </Link>
             <p className="text-muted-foreground max-w-sm mb-6 leading-relaxed">
-              AI-powered property marketing for luxury real estate. Transform your listings 
-              into cinematic experiences that captivate buyers worldwide.
+              {t("footer.description")}
             </p>
-            {/* Social links */}
             <div className="flex gap-4">
-            {socialLinks.map((social) => (
+              {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
@@ -64,16 +66,12 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Product links */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Product</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t("footer.product")}</h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {productLinks.map((link) => (
                 <li key={link.name}>
-                  <AnchorLink
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <AnchorLink to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </AnchorLink>
                 </li>
@@ -81,16 +79,12 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company links */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Company</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t("footer.company")}</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.name}>
-                  <AnchorLink
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <AnchorLink to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </AnchorLink>
                 </li>
@@ -98,24 +92,17 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal links */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t("footer.legal")}</h4>
             <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
+              {legalLinks.map((link) => (
                 <li key={link.name}>
                   {link.isRoute ? (
-                    <Link
-                      to={link.href}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
+                    <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                       {link.name}
                     </Link>
                   ) : (
-                    <a
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
+                    <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                       {link.name}
                     </a>
                   )}
@@ -125,19 +112,14 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-8 border-t border-border/30 flex flex-col items-center gap-4">
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-muted-foreground text-sm">
-              © SnapKaza 2026. All rights reserved.
-            </p>
-            <p className="text-muted-foreground text-sm">
-              Crafted with passion for luxury real estate
-            </p>
+            <p className="text-muted-foreground text-sm">{t("footer.copyright")}</p>
+            <p className="text-muted-foreground text-sm">{t("footer.tagline")}</p>
           </div>
           <p className="text-xs text-muted-foreground/60 flex items-center gap-1.5">
             <Leaf className="w-3 h-3" />
-            1% of every purchase is dedicated to carbon removal initiatives.
+            {t("footer.carbonNote")}
           </p>
         </div>
       </div>

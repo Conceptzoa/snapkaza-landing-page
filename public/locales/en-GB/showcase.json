@@ -1,0 +1,37 @@
+{
+  "title": "Powerful",
+  "titleHighlight": "AI Features",
+  "subtitle": "Discover our suite of AI-powered tools designed to transform your property marketing into stunning visual experiences.",
+  "tabs": {
+    "staging": {
+      "label": "AI Virtual Staging",
+      "description": "Transform empty spaces into beautifully furnished luxury interiors",
+      "benefit": "Stop wasting £2,000 on physical staging. Our AI creates beautifully furnished 3D interiors from your raw photos, helping buyers visualise their dream home instantly."
+    },
+    "video": {
+      "label": "Cinematic AI Video",
+      "description": "Create stunning property walkthroughs with cinematic quality",
+      "benefit": "Sell the future, not just the present. We transform a photo of a plot of land or a renovation project into a cinematic video of the completed building. Show your clients the final result before the first brick is even laid."
+    },
+    "upscaling": {
+      "label": "4K Upscaling",
+      "description": "Enhance any image to crystal-clear 4K resolution",
+      "benefit": "DSLR quality from your pocket. Our AI upgrades every smartphone photo to crystal-clear 4K resolution, ensuring your listings stand out on premium portals like Rightmove and Zoopla."
+    },
+    "avatars": {
+      "label": "AI Avatars",
+      "description": "Professional AI-generated presenter avatars for property tours",
+      "benefit": "Stop wasting hours filming and narrating. Simply send us your property photos, and we will create a high-end video narrated by your own Personalised AI Avatar. Build your personal brand on autopilot."
+    }
+  },
+  "beforeLabel": {
+    "staging": "Empty Room",
+    "upscaling": "Low Resolution"
+  },
+  "afterLabel": {
+    "staging": "AI Staged",
+    "upscaling": "4K Enhanced"
+  },
+  "avatarPlaceholder": "Simply send us your property photos, and we will create a high-end video narrated by your own Personalised AI Avatar.",
+  "demoComingSoon": "Demo Coming Soon"
+}

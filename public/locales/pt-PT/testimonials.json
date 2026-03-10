@@ -1,0 +1,34 @@
+{
+  "title": "Confiado pelos",
+  "titleHighlight": "Melhores Agentes",
+  "subtitle": "Junte-se a centenas de profissionais imobiliários que elevaram o seu marketing com o SnapKaza.",
+  "items": [
+    {
+      "name": "Sofia Mendes",
+      "role": "Consultora Sénior",
+      "agency": "Luxury Homes Portugal",
+      "quote": "O SnapKaza transformou completamente as nossas apresentações de imóveis. Propriedades que ficavam meses paradas agora vendem em semanas. Os vídeos com IA são absolutamente deslumbrantes."
+    },
+    {
+      "name": "Miguel Santos",
+      "role": "Mediador",
+      "agency": "Santos & Associates",
+      "quote": "O staging virtual poupa-nos milhares por anúncio. Os nossos clientes não acreditam na qualidade — muitos pensam que contratámos fotógrafos profissionais."
+    },
+    {
+      "name": "Ana Costa",
+      "role": "Directora Imobiliária",
+      "agency": "Costa Luxury Properties",
+      "quote": "A narração com IA em português é perfeita. É como ter um locutor profissional disponível a qualquer momento. Uma revolução para compradores internacionais."
+    },
+    {
+      "name": "João Ferreira",
+      "role": "Consultor Imobiliário",
+      "agency": "Prime Properties Lisbon",
+      "quote": "A entrega em 24 horas é incrível. Posso fotografar um imóvel de manhã e ter materiais de marketing profissionais no dia seguinte."
+    }
+  ],
+  "prevLabel": "Testemunho anterior",
+  "nextLabel": "Próximo testemunho",
+  "goToLabel": "Ir para o testemunho {{index}}"
+}

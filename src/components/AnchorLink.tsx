@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ReactNode, MouseEvent } from "react";
 
 interface AnchorLinkProps {
@@ -11,12 +11,17 @@ interface AnchorLinkProps {
 const AnchorLink = ({ to, children, className, onClick }: AnchorLinkProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || "en";
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     // Extract hash from "/#section" -> "#section"
     const hash = to.replace('/', '');
 
-    if (location.pathname === '/') {
+    // Check if we're on the home page (with lang prefix)
+    const isHomePage = location.pathname === `/${currentLang}` || location.pathname === `/${currentLang}/`;
+
+    if (isHomePage) {
       // Already on home page - smooth scroll
       e.preventDefault();
       const element = document.querySelector(hash);
@@ -26,15 +31,18 @@ const AnchorLink = ({ to, children, className, onClick }: AnchorLinkProps) => {
     } else {
       // On sub-page - navigate to home with hash
       e.preventDefault();
-      navigate(to);
+      navigate(`/${currentLang}${to}`);
     }
 
     // Call optional onClick (for mobile menu close)
     onClick?.();
   };
 
+  // Build the href with language prefix
+  const href = to.startsWith('/#') ? `/${currentLang}${to}` : to;
+
   return (
-    <a href={to} onClick={handleClick} className={className}>
+    <a href={href} onClick={handleClick} className={className}>
       {children}
     </a>
   );

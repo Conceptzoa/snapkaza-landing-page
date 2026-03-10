@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Play, Home, Video, Users, Maximize } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
@@ -8,45 +9,25 @@ import stagingAfter from "@/assets/staging-after.png";
 import upscalingBefore from "@/assets/upscaling-before.png";
 import upscalingAfter from "@/assets/upscaling-after.png";
 
-const featureTabs = [
-  {
-    id: "staging",
-    label: "AI Virtual Staging",
-    icon: Home,
-    description: "Transform empty spaces into beautifully furnished luxury interiors",
-    benefit: "Stop wasting £2,000 on physical staging. Our AI creates beautifully furnished 3D interiors from your raw photos, helping buyers visualise their dream home instantly.",
-  },
-  {
-    id: "video",
-    label: "Cinematic AI Video",
-    icon: Video,
-    description: "Create stunning property walkthroughs with cinematic quality",
-    benefit: "Sell the future, not just the present. We transform a photo of a plot of land or a renovation project into a cinematic video of the completed building. Show your clients the final result before the first brick is even laid.",
-  },
-  {
-    id: "upscaling",
-    label: "4K Upscaling",
-    icon: Maximize,
-    description: "Enhance any image to crystal-clear 4K resolution",
-    benefit: "DSLR quality from your pocket. Our AI upgrades every smartphone photo to crystal-clear 4K resolution, ensuring your listings stand out on premium portals like Rightmove and Zoopla.",
-  },
-  {
-    id: "avatars",
-    label: "AI Avatars",
-    icon: Users,
-    description: "Professional AI-generated presenter avatars for property tours",
-    benefit: "Stop wasting hours filming and narrating. Simply send us your property photos, and we will create a high-end video narrated by your own Personalised AI Avatar. Build your personal brand on autopilot.",
-  },
-];
+const tabIcons = {
+  staging: Home,
+  video: Video,
+  upscaling: Maximize,
+  avatars: Users,
+};
+
+const tabIds = ["staging", "video", "upscaling", "avatars"] as const;
 
 const VideoPlaceholder = ({
   icon: Icon,
   title,
-  description
+  description,
+  demoLabel,
 }: {
   icon: React.ElementType;
   title: string;
   description: string;
+  demoLabel: string;
 }) => (
   <div className="relative aspect-video rounded-xl overflow-hidden glass-card">
     <div className="absolute inset-0 bg-gradient-to-br from-charcoal-light via-charcoal to-charcoal-dark" />
@@ -66,7 +47,7 @@ const VideoPlaceholder = ({
       </div>
       <p className="text-muted-foreground text-center max-w-md mb-4">{description}</p>
       <span className="px-4 py-1.5 rounded-full glass text-sm text-primary font-medium">
-        Demo Coming Soon
+        {demoLabel}
       </span>
     </div>
     <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl-lg" />
@@ -78,7 +59,9 @@ const VideoPlaceholder = ({
 
 const Showcase = () => {
   const [activeTab, setActiveTab] = useState("staging");
-  const activeFeature = featureTabs.find(tab => tab.id === activeTab)!;
+  const { t } = useTranslation("showcase");
+
+  const ActiveIcon = tabIcons[activeTab as keyof typeof tabIcons];
 
   return (
     <section id="showcase" className="py-24 md:py-32 relative">
@@ -88,28 +71,29 @@ const Showcase = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Powerful <span className="gold-text">AI Features</span>
+            {t("title")} <span className="gold-text">{t("titleHighlight")}</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Discover our suite of AI-powered tools designed to transform your property marketing
-            into stunning visual experiences.
-          </p>
+          <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         {/* Feature Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
           <TabsList className="w-full flex flex-wrap justify-center gap-2 md:gap-3 bg-transparent h-auto p-0 mb-10">
-            {featureTabs.map((tab) => (
-              <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className="px-4 md:px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 data-[state=inactive]:glass data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-white/10 data-[state=active]:gold-gradient data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20"
-              >
-                <tab.icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{tab.label}</span>
-                <span className="sm:hidden">{tab.label.split(' ').pop()}</span>
-              </TabsTrigger>
-            ))}
+            {tabIds.map((id) => {
+              const Icon = tabIcons[id];
+              const label = t(`tabs.${id}.label`);
+              return (
+                <TabsTrigger
+                  key={id}
+                  value={id}
+                  className="px-4 md:px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 data-[state=inactive]:glass data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-white/10 data-[state=active]:gold-gradient data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20"
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{label}</span>
+                  <span className="sm:hidden">{label.split(' ').pop()}</span>
+                </TabsTrigger>
+              );
+            })}
           </TabsList>
 
           {/* Tab Content */}
@@ -121,8 +105,8 @@ const Showcase = () => {
               <BeforeAfterSlider
                 beforeImage={stagingBefore}
                 afterImage={stagingAfter}
-                beforeLabel="Empty Room"
-                afterLabel="AI Staged"
+                beforeLabel={t("beforeLabel.staging")}
+                afterLabel={t("afterLabel.staging")}
               />
             </TabsContent>
 
@@ -147,8 +131,8 @@ const Showcase = () => {
               <BeforeAfterSlider
                 beforeImage={upscalingBefore}
                 afterImage={upscalingAfter}
-                beforeLabel="Low Resolution"
-                afterLabel="4K Enhanced"
+                beforeLabel={t("beforeLabel.upscaling")}
+                afterLabel={t("afterLabel.upscaling")}
               />
             </TabsContent>
 
@@ -158,8 +142,9 @@ const Showcase = () => {
             >
               <VideoPlaceholder
                 icon={Users}
-                title="AI Avatars"
-                description="Simply send us your property photos, and we will create a high-end video narrated by your own Personalised AI Avatar."
+                title={t("tabs.avatars.label")}
+                description={t("avatarPlaceholder")}
+                demoLabel={t("demoComingSoon")}
               />
             </TabsContent>
           </div>
@@ -167,11 +152,11 @@ const Showcase = () => {
           {/* Animated benefit block */}
           <div key={activeTab} className="text-center mt-8 animate-fade-in">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <activeFeature.icon className="w-5 h-5 text-primary" />
-              <span className="font-serif text-lg font-semibold text-primary">{activeFeature.label}</span>
+              <ActiveIcon className="w-5 h-5 text-primary" />
+              <span className="font-serif text-lg font-semibold text-primary">{t(`tabs.${activeTab}.label`)}</span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {activeFeature.benefit}
+              {t(`tabs.${activeTab}.benefit`)}
             </p>
           </div>
         </Tabs>

@@ -1,6 +1,9 @@
 import { ArrowRight, Play } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation("hero");
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background gradient */}
@@ -28,19 +31,19 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-muted-foreground">AI-Powered Luxury Real Estate Marketing</span>
+            <span className="text-sm text-muted-foreground">{t("badge")}</span>
           </div>
 
           {/* Headline */}
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-in-delay-1">
-            Luxury Property Marketing from Your{" "}
+            {t("headline")}{" "}
             <br className="hidden md:block" />
-            <span className="gold-text">Smartphone.</span>
+            <span className="gold-text">{t("headlineHighlight")}</span>
           </h1>
 
           {/* Sub-headline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-delay-2">
-            For independent estate agents. Transform mobile photos into 4K visuals and 3D tours instantly. Save thousands in professional fees today.
+            {t("subheadline")}
           </p>
 
           {/* CTA Buttons */}
@@ -49,28 +52,28 @@ const Hero = () => {
               href="#pricing"
               className="btn-gold flex items-center gap-2 animate-subtle-pulse"
             >
-              Get Started
+              {t("ctaGetStarted")}
               <ArrowRight size={18} />
             </a>
             <button className="btn-ghost flex items-center gap-2">
               <Play size={18} />
-              Watch Demo
+              {t("ctaWatchDemo")}
             </button>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/30 animate-fade-in-delay-3">
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">500+</div>
-              <div className="text-sm text-muted-foreground">Properties Enhanced</div>
+              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">{t("stats.propertiesValue")}</div>
+              <div className="text-sm text-muted-foreground">{t("stats.propertiesLabel")}</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">98%</div>
-              <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">{t("stats.satisfactionValue")}</div>
+              <div className="text-sm text-muted-foreground">{t("stats.satisfactionLabel")}</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">24h</div>
-              <div className="text-sm text-muted-foreground">Turnaround Time</div>
+              <div className="font-serif text-3xl md:text-4xl font-bold gold-text mb-2">{t("stats.turnaroundValue")}</div>
+              <div className="text-sm text-muted-foreground">{t("stats.turnaroundLabel")}</div>
             </div>
           </div>
         </div>

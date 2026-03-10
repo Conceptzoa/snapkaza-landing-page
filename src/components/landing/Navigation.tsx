@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import AnchorLink from "@/components/AnchorLink";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation("common");
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || "en";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,9 +22,9 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: "Features", href: "/#showcase" },
-    { name: "Contact Us", href: "/#contact" },
-    { name: "Pricing", href: "/#pricing" },
+    { name: t("nav.features"), href: "/#showcase" },
+    { name: t("nav.contactUs"), href: "/#contact" },
+    { name: t("nav.pricing"), href: "/#pricing" },
   ];
 
   return (
@@ -30,7 +36,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to={`/${currentLang}`} className="flex items-center gap-2">
             <span className="font-serif text-2xl font-bold text-foreground">
               Snap<span className="gold-text">Kaza</span>
             </span>
@@ -49,15 +55,16 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button + Language Switcher */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             <Button
               variant="outline"
               className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
               asChild
             >
               <a href="https://app.snapkaza.com" target="_blank" rel="noopener noreferrer">
-                Client Login
+                {t("nav.clientLogin")}
               </a>
             </Button>
           </div>
@@ -76,6 +83,9 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden glass-card mt-4 p-6 animate-fade-in">
             <div className="flex flex-col gap-4">
+              <div className="pb-3 border-b border-border/30">
+                <LanguageSwitcher />
+              </div>
               {navLinks.map((link) => (
                 <AnchorLink
                   key={link.name}
@@ -92,7 +102,7 @@ const Navigation = () => {
                 asChild
               >
                 <a href="https://app.snapkaza.com" target="_blank" rel="noopener noreferrer">
-                  Client Login
+                  {t("nav.clientLogin")}
                 </a>
               </Button>
             </div>

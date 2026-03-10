@@ -1,87 +1,67 @@
 import { Smartphone, Upload, Globe, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const steps = [
-  {
-    icon: Smartphone,
-    number: "01",
-    title: "Capture",
-    description: "Upload your property photos directly from your smartphone to the SnapKaza app.",
-  },
-  {
-    icon: Upload,
-    number: "02",
-    title: "Upload",
-    description: "Our AI engine enhances visuals and generates 3D renders and narrated video tours.",
-  },
-  {
-    icon: Globe,
-    number: "03",
-    title: "Deploy",
-    description: "Launch your listing with a full luxury marketing suite in less than 30 minutes.",
-  },
-];
+const stepIcons = [Smartphone, Upload, Globe];
 
 const Process = () => {
+  const { t } = useTranslation("process");
+  const steps = t("steps", { returnObjects: true }) as Array<{
+    number: string;
+    title: string;
+    description: string;
+  }>;
+
   return (
     <section id="process" className="py-24 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-charcoal" />
-
-      {/* Decorative gradient */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">
-            The SnapKaza <span className="gold-text">Method</span>
+            {t("title")} <span className="gold-text">{t("titleHighlight")}</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Unlike traditional photographers who eat into your commission, we empower you to create professional assets instantly for a fraction of the cost.
-          </p>
+          <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
           <p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mt-3">
-            Professional AI transformations with automated delivery within minutes.
+            {t("subtitleItalic")}
           </p>
         </div>
 
-        {/* Steps */}
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {steps.map((step, index) => (
-            <div key={step.number} className="relative">
-              {/* Connector line (desktop only) */}
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-[60%] w-full">
-                  <div className="flex items-center">
-                    <div className="flex-1 h-px bg-gradient-to-r from-primary/50 to-primary/10" />
-                    <ArrowRight className="w-4 h-4 text-primary/50 -ml-1" />
-                  </div>
-                </div>
-              )}
-
-              <div className="glass-card p-8 text-center hover-lift hover-glow transition-all duration-300 h-full">
-                {/* Step number */}
-                <div className="inline-block mb-6">
-                  <div className="relative">
-                    <div className="w-20 h-20 rounded-2xl gold-gradient flex items-center justify-center shadow-lg shadow-primary/30">
-                      <step.icon className="w-10 h-10 text-primary-foreground" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-charcoal-light border-2 border-primary flex items-center justify-center">
-                      <span className="text-xs font-bold text-primary">{step.number}</span>
+          {steps.map((step, index) => {
+            const Icon = stepIcons[index];
+            return (
+              <div key={step.number} className="relative">
+                {index < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-16 left-[60%] w-full">
+                    <div className="flex items-center">
+                      <div className="flex-1 h-px bg-gradient-to-r from-primary/50 to-primary/10" />
+                      <ArrowRight className="w-4 h-4 text-primary/50 -ml-1" />
                     </div>
                   </div>
+                )}
+                <div className="glass-card p-8 text-center hover-lift hover-glow transition-all duration-300 h-full">
+                  <div className="inline-block mb-6">
+                    <div className="relative">
+                      <div className="w-20 h-20 rounded-2xl gold-gradient flex items-center justify-center shadow-lg shadow-primary/30">
+                        <Icon className="w-10 h-10 text-primary-foreground" />
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-charcoal-light border-2 border-primary flex items-center justify-center">
+                        <span className="text-xs font-bold text-primary">{step.number}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="font-serif text-2xl font-bold text-foreground mb-4">{step.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>
-
-                {/* Content */}
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-4">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* CTA */}
         <div className="text-center mt-16">
           <a href="#pricing" className="btn-gold inline-flex items-center gap-2">
-            Start Your Transformation
+            {t("cta")}
             <ArrowRight className="w-5 h-5" />
           </a>
         </div>

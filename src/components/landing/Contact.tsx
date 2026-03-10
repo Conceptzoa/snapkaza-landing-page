@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { Send, Mail, User, MessageSquare, ListFilter, Calendar } from "lucide-react";
 
 declare global {
@@ -24,41 +25,36 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// n8n webhook configuration
 const N8N_WEBHOOK_URL = "https://conceptzoa.app.n8n.cloud/webhook/snapkaza-contact";
 
-const subjectOptions = [
-  { value: "general", label: "General Inquiry" },
-  { value: "essential", label: "Property Launch - Essential" },
-  { value: "premium", label: "Property Launch - Premium" },
-  { value: "elite", label: "Property Launch - Elite" },
-  { value: "partnership", label: "Partnership & Business Opportunities" },
-] as const;
-
-const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, { message: "Full name is required" })
-    .max(100, { message: "Name must be less than 100 characters" }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "Please enter a valid email address" })
-    .max(255, { message: "Email must be less than 255 characters" }),
-  subject: z.enum(["general", "essential", "premium", "elite", "partnership"], {
-    required_error: "Please select a subject",
-  }),
-  message: z
-    .string()
-    .trim()
-    .min(1, { message: "Message is required" })
-    .max(1000, { message: "Message must be less than 1000 characters" }),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+const subjectKeys = ["general", "essential", "premium", "elite", "partnership"] as const;
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation("contact");
+
+  const contactSchema = z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, { message: t("validation.nameRequired") })
+      .max(100, { message: t("validation.nameMax") }),
+    email: z
+      .string()
+      .trim()
+      .email({ message: t("validation.emailInvalid") })
+      .max(255, { message: t("validation.emailMax") }),
+    subject: z.enum(["general", "essential", "premium", "elite", "partnership"], {
+      required_error: t("validation.subjectRequired"),
+    }),
+    message: z
+      .string()
+      .trim()
+      .min(1, { message: t("validation.messageRequired") })
+      .max(1000, { message: t("validation.messageMax") }),
+  });
+
+  type ContactFormData = z.infer<typeof contactSchema>;
+
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -103,13 +99,11 @@ const Contact: React.FC = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const subjectLabel = subjectOptions.find((opt) => opt.value === data.subject)?.label || data.subject;
+      const subjectLabel = t(`subjects.${data.subject}`);
       
       const response = await fetch(N8N_WEBHOOK_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: data.name,
           email: data.email,
@@ -118,19 +112,17 @@ const Contact: React.FC = () => {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-      toast.success("Message sent successfully!", {
-        description: "We'll get back to you within 24 hours.",
+      toast.success(t("toast.successTitle"), {
+        description: t("toast.successDescription"),
       });
 
       reset();
     } catch (error) {
       console.error("Webhook error:", error);
-      toast.error("Failed to send message", {
-        description: "Please try again or contact us directly.",
+      toast.error(t("toast.errorTitle"), {
+        description: t("toast.errorDescription"),
       });
     }
   };
@@ -141,74 +133,50 @@ const Contact: React.FC = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-2xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Get in <span className="gold-text">Touch</span>
+              {t("title")} <span className="gold-text">{t("titleHighlight")}</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Ready to transform your property marketing? We'd love to hear from
-              you.
-            </p>
+            <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
           </div>
 
-          {/* Contact Form */}
           <div className="glass-card p-6 md:p-10">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Name and Email Row */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="name"
-                    className="text-foreground flex items-center gap-2"
-                  >
+                  <Label htmlFor="name" className="text-foreground flex items-center gap-2">
                     <User className="w-4 h-4 text-primary" />
-                    Full Name
+                    {t("form.fullName")}
                   </Label>
                   <Input
                     id="name"
-                    placeholder="John Smith"
+                    placeholder={t("form.namePlaceholder")}
                     className="bg-charcoal/50 border-border/50 focus:border-primary placeholder:text-muted-foreground/50"
                     {...register("name")}
                   />
-                  {errors.name && (
-                    <p className="text-sm text-destructive">
-                      {errors.name.message}
-                    </p>
-                  )}
+                  {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
                 </div>
 
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="email"
-                    className="text-foreground flex items-center gap-2"
-                  >
+                  <Label htmlFor="email" className="text-foreground flex items-center gap-2">
                     <Mail className="w-4 h-4 text-primary" />
-                    Agency Email
+                    {t("form.agencyEmail")}
                   </Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="john@luxuryestates.co.uk"
+                    placeholder={t("form.emailPlaceholder")}
                     className="bg-charcoal/50 border-border/50 focus:border-primary placeholder:text-muted-foreground/50"
                     {...register("email")}
                   />
-                  {errors.email && (
-                    <p className="text-sm text-destructive">
-                      {errors.email.message}
-                    </p>
-                  )}
+                  {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
                 </div>
               </div>
 
-              {/* Subject Dropdown */}
               <div className="space-y-2">
-                <Label
-                  htmlFor="subject"
-                  className="text-foreground flex items-center gap-2"
-                >
+                <Label htmlFor="subject" className="text-foreground flex items-center gap-2">
                   <ListFilter className="w-4 h-4 text-primary" />
-                  Subject
+                  {t("form.subject")}
                 </Label>
                 <Controller
                   name="subject"
@@ -216,53 +184,40 @@ const Contact: React.FC = () => {
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="bg-charcoal/50 border-border/50 focus:border-primary text-foreground">
-                        <SelectValue placeholder="Select a subject" />
+                        <SelectValue placeholder={t("form.subjectPlaceholder")} />
                       </SelectTrigger>
                       <SelectContent className="bg-charcoal border-border/50">
-                        {subjectOptions.map((option) => (
+                        {subjectKeys.map((key) => (
                           <SelectItem
-                            key={option.value}
-                            value={option.value}
+                            key={key}
+                            value={key}
                             className="text-foreground focus:bg-primary/20 focus:text-foreground"
                           >
-                            {option.label}
+                            {t(`subjects.${key}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   )}
                 />
-                {errors.subject && (
-                  <p className="text-sm text-destructive">
-                    {errors.subject.message}
-                  </p>
-                )}
+                {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
               </div>
 
-              {/* Message */}
               <div className="space-y-2">
-                <Label
-                  htmlFor="message"
-                  className="text-foreground flex items-center gap-2"
-                >
+                <Label htmlFor="message" className="text-foreground flex items-center gap-2">
                   <MessageSquare className="w-4 h-4 text-primary" />
-                  Your Message
+                  {t("form.yourMessage")}
                 </Label>
                 <Textarea
                   id="message"
-                  placeholder="Tell us about your property marketing needs..."
+                  placeholder={t("form.messagePlaceholder")}
                   rows={5}
                   className="bg-charcoal/50 border-border/50 focus:border-primary placeholder:text-muted-foreground/50 resize-none"
                   {...register("message")}
                 />
-                {errors.message && (
-                  <p className="text-sm text-destructive">
-                    {errors.message.message}
-                  </p>
-                )}
+                {errors.message && <p className="text-sm text-destructive">{errors.message.message}</p>}
               </div>
 
-              {/* Submit Button */}
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -271,36 +226,32 @@ const Contact: React.FC = () => {
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                    Sending...
+                    {t("form.sending")}
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <Send className="w-4 h-4" />
-                    Send Message
+                    {t("form.sendMessage")}
                   </span>
                 )}
               </Button>
             </form>
 
-            {/* Trust indicators */}
             <div className="mt-8 pt-6 border-t border-border/30">
               <p className="text-center text-muted-foreground text-sm">
-                We typically respond within 24 hours. Your information is secure
-                and will never be shared. You can also reach us at{" "}
+                {t("trustNote")}{" "}
                 <a href="mailto:hello@snapkaza.com" className="text-primary hover:underline">
                   hello@snapkaza.com
                 </a>.
               </p>
             </div>
 
-            {/* Or divider */}
             <div className="flex items-center gap-4 mt-6">
               <div className="flex-1 h-px bg-border/30" />
-              <span className="text-muted-foreground text-sm">or</span>
+              <span className="text-muted-foreground text-sm">{t("or")}</span>
               <div className="flex-1 h-px bg-border/30" />
             </div>
 
-            {/* Calendly Button */}
             <Button
               type="button"
               variant="outline"
@@ -308,7 +259,7 @@ const Contact: React.FC = () => {
               className="w-full mt-6 h-12 text-base font-semibold border-primary/50 text-foreground hover:border-primary hover:bg-primary/10 hover-glow transition-all duration-300"
             >
               <Calendar className="w-4 h-4" />
-              Schedule a Demo Meeting
+              {t("scheduleMeeting")}
             </Button>
           </div>
         </div>

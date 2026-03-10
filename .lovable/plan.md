@@ -1,45 +1,36 @@
 
 
-# Add WhatsApp Floating Action Button (FAB)
+# Fix: 404 on Direct URL Access to `/en/` and `/pt/`
 
-Create a new `WhatsAppFAB` component and render it globally in `App.tsx` so it appears on all pages.
+## Diagnosis
 
----
+The **React Router configuration in `App.tsx` is correct** — the `/:lang` route with nested children properly handles `/en`, `/pt`, and their sub-paths. The `LanguageLayout` component validates the language parameter and syncs i18next. No issues there.
 
-## New File: `src/components/WhatsAppFAB.tsx`
+The **root cause is a hosting/SPA configuration issue**. Lovable deploys as a single-page application. When a user navigates directly to `snapkaza.com/pt/` (or any sub-path), the hosting server looks for a physical `/pt/index.html` file, which doesn't exist. It needs to serve `/index.html` for all routes so React Router can handle them client-side.
 
-A fixed-position button in the bottom-right corner with:
+The `vite.config.ts` and `index.html` base paths are fine — no conflicts.
 
-- **Custom WhatsApp SVG icon** (clean, recognizable silhouette) -- lucide-react does not include a WhatsApp icon, so we use an inline SVG.
-- **Styling**: Dark background with a subtle gold glow (`shadow-[0_0_20px_hsl(40_55%_60%_/_0.3)]`), rounded-full, matching the luxury theme.
-- **onClick**: Opens `https://wa.me/351962997070?text=Hi!%20I'm%20interested%20in%20SnapKaza%20AI%20features%20and%20would%20like%20more%20information.` in a new tab.
-- **Tooltip**: A small "Message us" label that appears on load (via a 3-second auto-dismiss animation using CSS) and also on hover.
-- **Positioning**: `fixed bottom-6 right-6` on desktop, `bottom-20 right-4` on mobile (using `md:` breakpoints) to avoid overlapping footer links.
-- **Size**: `w-14 h-14` (56px) -- touch-friendly on mobile.
-- **z-index**: `z-50` to stay above all content.
+## Fix
 
-The tooltip auto-shows on mount with a fade-in/fade-out animation (appears after 1s, disappears after 4s) using a `useState` + `useEffect` timer.
+Create a `public/_redirects` file. Lovable's hosting infrastructure respects this file (same as Netlify/Cloudflare Pages convention). It tells the server to serve `index.html` for all paths, letting React Router take over.
 
----
+### New file: `public/_redirects`
 
-## Updated File: `src/App.tsx`
-
-Add `<WhatsAppFAB />` inside the `TooltipProvider`, after `<Sonner />` and before `<BrowserRouter>`, so it renders on every page:
-
-```tsx
-import WhatsAppFAB from "./components/WhatsAppFAB";
-// ...
-<Sonner />
-<WhatsAppFAB />
-<BrowserRouter>
+```
+/*    /index.html   200
 ```
 
----
+That single line is the entire fix. No code changes needed to `App.tsx`, `vite.config.ts`, or any component.
 
-## Files Summary
+## Why This Works
+
+- The `200` status (not `301` or `302`) means the server serves `index.html` **without changing the URL**, so the browser keeps `/pt/` in the address bar.
+- React Router then reads the path, matches `/:lang`, and renders the correct language layout.
+- This is a deployment-level configuration, not a code logic issue.
+
+## Files
 
 | File | Change |
 |------|--------|
-| `src/components/WhatsAppFAB.tsx` | New component |
-| `src/App.tsx` | Import and render `WhatsAppFAB` |
+| `public/_redirects` | **New** — single SPA redirect rule |
 
